@@ -4,12 +4,14 @@ import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import web.proto.model.Associate;
 import web.proto.model.enums.Area;
 import web.proto.model.enums.State;
 
 @Getter
 @Setter
+@ToString
 public class ProjectFilter {
     
     private Long id;
