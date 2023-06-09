@@ -6,15 +6,15 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -52,18 +52,11 @@ public class Project {
     @Enumerated(EnumType.STRING)
     private License license;
 
-    @ManyToMany
-    @JoinTable(
-            name = "project_phases",
-            joinColumns = @JoinColumn(name = "project_id"),
-            inverseJoinColumns = @JoinColumn(name = "phase_id")
-    )
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<Phase> phases;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate data;
-
-    // Construtores, getters e setters
 
 }
 
