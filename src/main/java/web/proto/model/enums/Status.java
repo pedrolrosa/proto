@@ -2,8 +2,8 @@ package web.proto.model.enums;
 
 public enum Status {
 
-	ATIVO("ativo"),
-	INATIVO("inativo");
+	ATIVO("Active"),
+	INATIVO("Inactive");
 	
 	private String descricao;
 	

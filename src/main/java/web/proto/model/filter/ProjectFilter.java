@@ -18,6 +18,6 @@ public class ProjectFilter {
     private String description;
     private Area area;
     private State state;
-    private LocalDate data;
+    private LocalDate date;
 
 }

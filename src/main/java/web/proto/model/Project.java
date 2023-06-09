@@ -5,8 +5,9 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -56,7 +57,8 @@ public class Project {
     private List<Phase> phases;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate data;
+    @Column(name = "date_creation")
+    private LocalDate dateCreation;
 
 }
 

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -57,7 +58,8 @@ public class Associate {
     private List<Area> interests;
     
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate data;
+    @Column(name = "date_creation")
+    private LocalDate dateCreation;
 
     @Enumerated(EnumType.STRING)
 	private Status status = Status.ATIVO;
