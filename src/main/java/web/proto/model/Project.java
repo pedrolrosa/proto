@@ -57,8 +57,8 @@ public class Project {
     private List<Phase> phases;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
+    @Column(name = "date_created")
+    private LocalDate dateCreated;
 
 }
 

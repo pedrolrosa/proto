@@ -6,7 +6,8 @@ CREATE TABLE public.project  (
   area text NOT NULL,
   state text NOT NULL,
   license text NOT NULL,
-  date_creation date,
+  date_created date,
+  status text DEFAULT 'ACTIVE',
   PRIMARY KEY (id)
 );
 

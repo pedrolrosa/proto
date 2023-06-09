@@ -20,12 +20,14 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import web.proto.model.enums.Area;
 import web.proto.model.enums.Role;
 import web.proto.model.enums.Status;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "associates")
 public class Associate {
     
@@ -58,8 +60,8 @@ public class Associate {
     private List<Area> interests;
     
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
+    @Column(name = "date_created")
+    private LocalDate dateCreated;
 
     @Enumerated(EnumType.STRING)
 	private Status status = Status.ATIVO;
