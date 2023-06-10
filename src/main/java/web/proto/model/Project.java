@@ -23,14 +23,17 @@ import lombok.Data;
 import web.proto.model.enums.Area;
 import web.proto.model.enums.License;
 import web.proto.model.enums.State;
+import web.proto.model.enums.Status;
 
 @Entity
 @Data
 @Table(name = "projects")
 public class Project {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @SequenceGenerator(name="gerador3", sequenceName="usuario_codigo_seq", allocationSize=1)
+    @SequenceGenerator(name="gerador3", sequenceName="project_id_seq", allocationSize=1)
 	@GeneratedValue(generator="gerador3", strategy=GenerationType.SEQUENCE)
     private Long id;
 
@@ -59,6 +62,9 @@ public class Project {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     @Column(name = "date_created")
     private LocalDate dateCreated;
+
+    @Enumerated(EnumType.STRING)
+	private Status status = Status.ACTIVE;
 
 }
 

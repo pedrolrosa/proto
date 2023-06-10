@@ -1,4 +1,4 @@
-CREATE TABLE public.rate (
+CREATE TABLE public.rates (
   id bigserial NOT NULL,
   owner_id bigserial NOT NULL,
   project_id bigserial NOT NULL,

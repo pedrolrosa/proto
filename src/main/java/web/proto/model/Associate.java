@@ -30,9 +30,11 @@ import web.proto.model.enums.Status;
 @NoArgsConstructor
 @Table(name = "associates")
 public class Associate {
+
+    private static final long serialVersionUID = 1L;
     
     @Id
-    @SequenceGenerator(name="gerador1", sequenceName="usuario_codigo_seq", allocationSize=1)
+    @SequenceGenerator(name="gerador1", sequenceName="associates_id_seq", allocationSize=1)
 	@GeneratedValue(generator="gerador1", strategy=GenerationType.SEQUENCE)
     private long id;
     
@@ -64,6 +66,6 @@ public class Associate {
     private LocalDate dateCreated;
 
     @Enumerated(EnumType.STRING)
-	private Status status = Status.ATIVO;
+	private Status status = Status.ACTIVE;
 
 }

@@ -1,4 +1,4 @@
-CREATE TABLE public.project  (
+CREATE TABLE public.projects  (
   id bigserial NOT NULL,
   owner_id bigserial NOT NULL,
   name text NOT NULL,

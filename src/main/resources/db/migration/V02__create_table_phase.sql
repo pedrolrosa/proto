@@ -1,4 +1,4 @@
-CREATE TABLE public.phase (
+CREATE TABLE public.phases (
   id bigserial NOT NULL,
   name text NOT NULL,
   description text NOT NULL,

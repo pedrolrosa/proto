@@ -20,8 +20,10 @@ import web.proto.model.enums.Status;
 @Table(name = "phases")
 public class Phase {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @SequenceGenerator(name="gerador2", sequenceName="usuario_codigo_seq", allocationSize=1)
+    @SequenceGenerator(name="gerador2", sequenceName="phase_id_seq", allocationSize=1)
 	@GeneratedValue(generator="gerador2", strategy=GenerationType.SEQUENCE)
     private Long id;
 
@@ -39,7 +41,7 @@ public class Phase {
     private byte[] content;
 
     @Enumerated(EnumType.STRING)
-	private Status status = Status.ATIVO;
+	private Status status = Status.ACTIVE;
 
 }
 

@@ -2,16 +2,16 @@ package web.proto.model.enums;
 
 public enum Status {
 
-	ATIVO("Active"),
-	INATIVO("Inactive");
+	ACTIVE("Active"),
+	INACTIVE("Inactive");
 	
-	private String descricao;
+	private String description;
 	
-	private Status(String descricao) {
-		this.descricao = descricao;
+	private Status(String description) {
+		this.description = description;
 	}
 	
 	public String getDescricao() {
-		return descricao;
+		return description;
 	}
 }

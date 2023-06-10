@@ -15,8 +15,10 @@ import lombok.Data;
 @Table(name = "rates")
 public class Rate {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @SequenceGenerator(name="gerador4", sequenceName="usuario_codigo_seq", allocationSize=1)
+    @SequenceGenerator(name="gerador4", sequenceName="rate_id_seq", allocationSize=1)
 	@GeneratedValue(generator="gerador4", strategy=GenerationType.SEQUENCE)
     private Long id;
 
