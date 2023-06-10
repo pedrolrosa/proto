@@ -1,6 +1,6 @@
 -- População inicial da tabela Associate
 INSERT INTO associate (id, name, email, login, password, role, relevancy, date_created)
-VALUES (1, 'John Doe', 'john@example.com', 'john', 'password', 'USER', true, '2023-04-19');
+VALUES (1, 'John Doe', 'john@example.com', 'john', '123', 'USER', true, '2023-04-19');
 INSERT INTO associate (id, name, email, login, password, role, relevancy, date_created)
 VALUES (2, 'Jane Smith', 'jane@example.com', 'jane', '123', 'USER', false, '2023-04-19');
 INSERT INTO associate (id, name, email, login, password, role, relevancy, date_created)

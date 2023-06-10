@@ -35,21 +35,21 @@ window.addEventListener("load", function() {
     
     //Busca por botoes com a classe confirmacao e usa o AlertifyJS para pedir uma 
     // confirmacao do usuario antes de efetuar o submit do formulario pai do botao.
-    //O valor do input hidden com a classe mensagem dentro do formulario eh exibido na pergunta.
+    //O valor do input hidden com a classe message dentro do formulario eh exibido na pergunta.
     //Caso o usuario aceite, o formulario eh submetido, caso cancele ou feche nada acontece.
     function prepararConfirmacoes() {
     	let botoesConfirmacao = document.querySelectorAll(".confirmacao");
     	botoesConfirmacao.forEach(function(botao) {
     		let formPai = botao.parentNode;
     		formPai.addEventListener("submit", function(evento) {
-    			let mensagem = "Você esqueceu de definir a mensagem a ser exibida aqui...";   			
-    			let inputMensagem = formPai.getElementsByClassName("mensagem")[0];
+    			let message = "Você esqueceu de definir a message a ser exibida aqui...";   			
+    			let inputMensagem = formPai.getElementsByClassName("message")[0];
     			if (inputMensagem !== undefined) {
-    				mensagem = inputMensagem.value;
+    				message = inputMensagem.value;
     			}    				
     			evento.preventDefault();
 	    		alertify.set('notifier', 'position', 'top-right');
-    			alertify.confirm('Confirmação', mensagem, aceitou, cancelou()).set('labels', { ok: 'Sim', cancel: 'Não' });
+    			alertify.confirm('Confirmação', message, aceitou, cancelou()).set('labels', { ok: 'Sim', cancel: 'Não' });
 
 	    		function aceitou() {
 	    			formPai.submit();
@@ -62,17 +62,17 @@ window.addEventListener("load", function() {
     }
     
     
-    //Busca por um input hidden com o id mensagem no HTML da página atual.
-    //Caso encontre, busca por um input hidden com o id tipo e um input hidden com o id intervalo.
-    //Mostra uma notificao do AlertifyJS desse tipo com essa mensagem por esse intervalor.
+    //Busca por um input hidden com o id message no HTML da página atual.
+    //Caso encontre, busca por um input hidden com o id type e um input hidden com o id interval.
+    //Mostra uma notificao do AlertifyJS desse type com essa message por esse intervalor.
     function mostrarNotificacaoFromHTML() {
-        let inputMensagem = document.getElementById("mensagem");
+        let inputMensagem = document.getElementById("message");
     	if (inputMensagem !== null && inputMensagem.value !== "") {
-	    	mensagem = inputMensagem.value;
-	    	tipo = document.getElementById("tipo").value;
-	    	intervalo = document.getElementById("intervalo").value;
+	    	message = inputMensagem.value;
+	    	type = document.getElementById("type").value;
+	    	interval = document.getElementById("interval").value;
             alertify.set('notifier', 'position', 'top-right');
-    		alertify.notify(mensagem, tipo, intervalo);
+    		alertify.notify(message, type, interval);
 	    }
 	}
 	
@@ -91,7 +91,7 @@ window.addEventListener("load", function() {
 	//Funcao que envia o formulario alvo do evento (submit) via AJAX.
 	//A URL da requisicao é obtida do action do formulario.
 	//Os dados do formulario são enviados no formato JSON.
-	//Dependendo do tipo da resposta recebida (FRAGMENTO, NOTIFICACAO ou  FRAGMENTO_E_NOTIFICACAO) a pagina atual é atualizada com o fragmento recebido e/ou a notificacao é exibida.
+	//Dependendo do type da resposta recebida (FRAGMENTO, NOTIFICACAO ou  FRAGMENTO_E_NOTIFICACAO) a pagina atual é atualizada com o fragmento recebido e/ou a notificacao é exibida.
 	function enviarFormulario(evento) {
 		evento.preventDefault();
 		let formulario = evento.target;
@@ -125,10 +125,10 @@ window.addEventListener("load", function() {
 	}
 
 	//Funcao que mostra uma notificacao do AlertifyJS.
-	//notificacao deve ser um objeto com os atributos mensagem, tipo e intervalo.
-	//o tipo deve ser um dos tipos permitidos pelo AlertifyJS: success, error, warning ou message
+	//notificacao deve ser um objeto com os atributos message, type e interval.
+	//o type deve ser um dos tipos permitidos pelo AlertifyJS: success, error, warning ou message
 	function mostrarNotificacao(notificacao) {
-		alertify.notify(notificacao.mensagem, notificacao.tipo, notificacao.intervalo);
+		alertify.notify(notificacao.message, notificacao.type, notificacao.interval);
 		atualizarCodigoNaPagina();
 	}
 
@@ -157,10 +157,10 @@ window.addEventListener("load", function() {
 			if (this.status == 200) {
 				let resposta = {};
 				if (this.response.startsWith('{')) {
-					console.log("O tipo da resposta recebida é JSON");
+					console.log("O type da resposta recebida é JSON");
 					resposta = JSON.parse(this.response);
 				} else {
-					console.log("O tipo da resposta recebida NÃO é JSON");
+					console.log("O type da resposta recebida NÃO é JSON");
 					resposta = this.response;
 				}
 				funcaoSucesso(resposta);

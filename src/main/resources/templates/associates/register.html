@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Associate</title>
+</head>
+<body>
+	<div layout:fragment="conteudo">
+
+		<div th:replace="~{layout/fragments/sidebar :: sidebar(opcao='profile')}"></div>
+
+		<main class="mt-5 p-4 pt-5">
+			<div class="container-fluid">
+				<h1>Associate Register</h1>
+
+				<form th:action="@{/associate/save}" th:object="${associate}" method="post" class="container">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" id="name" th:field="*{name}" class="form-control" required>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" id="email" th:field="*{email}" class="form-control" required>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="login" class="form-label">Login:</label>
+                        <input type="text" id="login" th:field="*{login}" class="form-control" required>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" id="password" th:field="*{password}" class="form-control" required>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role:</label>
+                        <select id="role" th:field="*{role}" class="form-control" required>
+                            <option value="ROLE_USER">User</option>
+                            <option value="ROLE_ADMIN">Admin</option>
+                        </select>
+                    </div>
+                
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" id="relevancy" th:field="*{relevancy}" class="form-check-input">
+                        <label class="form-check-label" for="relevancy">Relevancy</label>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="interests" class="form-label">Interests:</label>
+                        <div class="form-check" th:each="area : ${T(web.proto.model.enums.Area).values()}">
+                            <input type="checkbox" th:id="'interest-' + ${area}" th:name="interests" th:value="${area}" class="form-check-input">
+                            <label class="form-check-label" th:for="'interest-' + ${area}" th:text="${area.getLabel()}"></label>
+                        </div>
+                    </div>
+                    
+                
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                
+				
+				<div th:if="${notification != null}" th:object="${notification}">
+					<input type="hidden" id="message" th:value="*{message}">
+					<input type="hidden" id="type" th:value="*{type}">
+					<input type="hidden" id="interval" th:value="*{interval}">
+                </div>
+			</div>
+		</main>
+
+	</div>
+
+</body>
+</html>
+
