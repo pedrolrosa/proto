@@ -10,18 +10,26 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import groovy.util.logging.Slf4j;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import web.proto.ajax.NotificacaoAlertify;
+import web.proto.ajax.RespostaJSON;
+import web.proto.ajax.ThymeleafUtil;
+import web.proto.ajax.TipoNotificaoAlertify;
+import web.proto.ajax.TipoResposta;
 import web.proto.model.Associate;
 import web.proto.model.enums.Status;
 import web.proto.model.filter.AssociateFilter;
@@ -41,6 +49,9 @@ public class AssociateController {
 
     @Autowired
     private AssociateService service;
+
+    @Autowired
+    private ThymeleafUtil util;
 
     @GetMapping("/opensearch")
     public String openSearch() {
@@ -67,14 +78,48 @@ public class AssociateController {
         return "associates/save";
     }
 
-    @PostMapping("/save")
-    public String createAssociate(@ModelAttribute("associate") Associate associate) {
-        service.save(associate);
-        return "redirect:/associates";
+    @PostMapping(value = { "/save" }, produces = { MediaType.APPLICATION_JSON_VALUE })
+    @ResponseBody
+    public RespostaJSON createAssociate(@RequestBody @Valid @ModelAttribute("associate") Associate obj,
+            BindingResult resultado,
+            Model model, HttpServletRequest request, HttpServletResponse response) {
+
+        RespostaJSON resposta;
+
+        if (resultado.hasErrors()) {
+            model.addAttribute("title", "Register Associate");
+            model.addAttribute("url", "/associates/save");
+            model.addAttribute("btn", "Register");
+            resposta = new RespostaJSON(TipoResposta.FRAGMENTO);
+
+            String html = util.processThymeleafTemplate(request, response, model.asMap(), "associates/save",
+                    "save");
+            resposta.setHtmlFragmento(html);
+
+        } else {
+            service.save(obj);
+
+            NotificacaoAlertify notificacaoAlertify = new NotificacaoAlertify("Created Associate",
+                    TipoNotificaoAlertify.SUCESSO, 5); 
+            model.addAttribute("title", "Register Associate");
+            model.addAttribute("url", "/associates/save");
+            model.addAttribute("btn", "Register");
+
+            resposta = new RespostaJSON(TipoResposta.FRAGMENTO_E_NOTIFICACAO);
+            resposta.setNotificacao(notificacaoAlertify);
+            model.addAttribute("associate", new Associate());
+            String html = util.processThymeleafTemplate(request, response, model.asMap(), "/associates/save",
+                    "save");
+            resposta.setHtmlFragmento(html);
+
+        }
+
+        return resposta;
     }
 
     @PostMapping("/openupdate")
     public String openUpdate(Long id, Model model) {
+        if (id != null) {
             Optional<Associate> opt = repository.findById(id);
             Associate associate = opt.get();
             model.addAttribute("associate", associate);
@@ -82,26 +127,34 @@ public class AssociateController {
             model.addAttribute("url", "/associates/update");
             model.addAttribute("btn", "Update");
             return "associates/save";
-    }
-
-    @PostMapping("/update")
-    public String update(Associate associate, Model model) {
-        service.save(associate);
+        }
+        model.addAttribute("message", "There is no person with code: " + id);
+        model.addAttribute("option", "associate");
         return "mostrarmensagem";
     }
 
+    @PostMapping("/update")
+    public String update(@Valid Associate obj, BindingResult resultado, Model model) {
+        if (resultado.hasErrors()) {
+            return openUpdate(obj.getId(), model);
+        } else {
+            service.save(obj);
+            return "mostrarmensagem";
+        }
+    }
+
     @PostMapping("/abrirremover")
-    public String openDelete(Associate associate) {
+    public String openDelete(Associate obj) {
         return "associates/delete";
     }
 
     @PostMapping("/delete")
     public String delete(Long id, Model model) {
-        Optional<Associate> optLote = repository.findById(id);
-        if (optLote.isPresent()) {
-            Associate associate = optLote.get();
-            associate.setStatus(Status.INACTIVE);
-            service.save(associate);
+        Optional<Associate> opt = repository.findById(id);
+        if (opt.isPresent()) {
+            Associate obj = opt.get();
+            obj.setStatus(Status.INACTIVE);
+            service.save(obj);
             model.addAttribute("option", "associate");
             model.addAttribute("message", "Excluiu");
             return "mostrarmensagem";
