@@ -30,7 +30,6 @@ public class AssociateController {
     
     private static final Logger logger = LoggerFactory.getLogger(AssociateController.class);
 
-
     @Autowired
     private AssociateRepository repository;
     
@@ -52,16 +51,19 @@ public class AssociateController {
         PageWrapper<Associate> paginaWrapper = new PageWrapper<>(pagina, request);
         logger.info("Pessoas buscadas no BD: {}", paginaWrapper.getConteudo());
         model.addAttribute("pagina", paginaWrapper);
-        return "associates/searchresults";
+        return "associates/associates";
     }
     
-    @GetMapping("/register")
+    @GetMapping("/save")
 	public String showRegisterForm(Model model) {
         model.addAttribute("associate", new Associate());
-        return "associates/register";
+        model.addAttribute("title", "Register Associate");
+        model.addAttribute("url", "/associates/save");
+        model.addAttribute("btn", "Register");
+        return "associates/save";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/save")
     public String createAssociate(@ModelAttribute("associate") Associate associate) {
         service.save(associate);
         return "redirect:/associates";
