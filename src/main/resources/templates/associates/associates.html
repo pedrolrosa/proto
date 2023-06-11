@@ -38,7 +38,7 @@
 						<td th:text="${{associate.dateCreated}}"></td>
 						
                         <td>
-                            <form th:action="@{/associates/update}" method="POST">
+                            <form th:action="@{/associates/openupdate}" method="post">
                                 <input type="hidden" name="id" th:value="${associate.id}">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="bi bi-pencil-fill"></i>
@@ -46,7 +46,7 @@
                             </form>
                         </td>
                         <td>
-                            <form th:action="@{/associates/delete}" method="POST">
+                            <form th:action="@{/associates/delete}" method="post">
                                 <input type="hidden" th:value="'Are you sure you want to remove the associate ' + ${associate.name} + '?'" class="message">
                                 <input type="hidden" name="id" th:value="${associate.id}">
                                 <button type="submit" class="btn btn-danger confirmation">

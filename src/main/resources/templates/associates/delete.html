@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Confirmar Remoção</title>
+</head>
+
+<body>
+    <div layout:fragment="conteudo">
+
+        <div th:replace="~{layout/fragments/sidebar :: sidebar(opcao='associate')}"></div>
+
+        <!-- conteudo principal -->
+        <main class="mt-5 p-4 pt-5">
+            <div class="container-fluid">
+
+                <h1>Você tem certeza que quer remover o Lote?</h1>
+
+                <p th:text="'Id             : ' + ${associate.id}"></p>
+                <p th:text="'Name           : ' + ${associate.name}"></p>
+                <p th:text="'Email          : ' + ${associate.email}"></p>
+                <p th:text="'Login          : ' + ${associate.login}"></p>
+                <p th:text="'Password       : ' + ${associate.password}"></p>
+                <p th:text="'Role           : ' + ${associate.role}"></p>
+                <p th:text="'Relevancy      : ' + ${associate.relevancy}"></p>
+                <p th:text="'Date of Creation : ' + ${#dates.format(associate.dateCreation, 'yyyy-MM-dd HH:mm:ss')}">
+                </p>
+
+                <form th:action="@{/lotes/remover}" method="POST">
+                    <input type="hidden" th:field="${associate.id}">
+                    <input type="submit" value="Sim" class="btn btn-danger">
+                </form>
+
+            </div>
+        </main>
+
+    </div>
+
+</body>
+
+</html>

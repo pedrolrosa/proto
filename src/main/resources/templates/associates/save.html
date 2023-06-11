@@ -10,12 +10,13 @@
 
 <body>
 	<div layout:fragment="conteudo">
-		<div th:replace="~{layout/fragments/sidebar :: sidebar(option='associates')}"></div>
+		<div th:replace="~{layout/fragments/sidebar :: sidebar(option='associate')}"></div>
 
 		<main class="mt-5 p-4 pt-5">
 			<div class="container-fluid">
 
 				<form th:action="@{${url}}" th:object="${associate}" method="post">
+					<input type="hidden" th:field="*{id}">
 
 					<label for="name" class="form-label mt-3">Name:</label>
 					<input type="text" id="name" th:field="*{name}" class="form-control" required />
@@ -49,7 +50,7 @@
 								th:text="${area.getLabel()}"></label>
 						</div>
 					</div>
-					
+
 
 					<button type="submit" th:text="${btn}" class="btn btn-primary">
 						Submit
