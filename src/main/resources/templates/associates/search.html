@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html
+	lang="pt-BR"
+	layout:decorate="~{layout/layoutpadrao}"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+		<title>Search Associates</title>
+	</head>
+	<body>
+		<div layout:fragment="conteudo">
+			<div
+				th:replace="~{layout/fragments/sidebar :: sidebar(option='associate')}"></div>
+
+			<!-- conteudo principal -->
+			<main class="mt-5 p-4 pt-5">
+				<div class="container-fluid">
+					<form th:action="@{/associates/search}" method="GET">
+						<label for="id" class="form-label">Id</label>
+						<input
+							type="number"
+							id="id"
+							name="id"
+							class="form-control" />
+
+						<label for="name" class="form-label">Name</label>
+						<input
+							type="text"
+							id="name"
+							name="name"
+							class="form-control" />
+
+						<label for="email" class="form-label">Email</label>
+						<input
+							type="text"
+							id="email"
+							name="email"
+							class="form-control" />
+
+						<label for="login" class="form-label">Login</label>
+						<input
+							type="text"
+							id="login"
+							name="login"
+							class="form-control" />
+
+						<label for="role" class="form-label mt-3">Role:</label>
+						<select
+							id="role"
+							class="form-control">
+							<option
+								th:each="role : ${T(web.proto.model.enums.Role).values()}"
+								th:text="${role.getLabel()}"
+								th:value="${role}"></option>
+						</select>
+
+						<div class="mt-3 form-check">
+							<input
+								type="checkbox"
+								id="relevancy"
+								class="form-check-input" />
+							<label class="form-check-label" for="relevancy"
+								>Relevancy</label
+							>
+						</div>
+
+						<label for="dateCreated" class="form-label mt-3"
+							>Year and Mounth Created</label
+						>
+						<input
+							type="text"
+							id="dateCreated"
+							name="dateCreated"
+							class="form-control dateComponent" />
+
+						<input
+							type="submit"
+							value="Search"
+							class="btn btn-primary mt-3" />
+					</form>
+
+					<div
+						th:if="${notification != null}"
+						th:object="${notification}">
+						<input
+							type="hidden"
+							id="message"
+							th:value="*{message}" />
+						<input type="hidden" id="type" th:value="*{type}" />
+						<input
+							type="hidden"
+							id="interval"
+							th:value="*{interval}" />
+					</div>
+				</div>
+			</main>
+			<!-- !conteudo principal -->
+		</div>
+	</body>
+</html>

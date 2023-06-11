@@ -6,7 +6,7 @@
 			class="offcanvas offcanvas-start bg-dark text-white sidebar-nav"
 			tabindex="-1"
 			id="sidebar"
-			th:fragment="sidebar (opcao)">
+			th:fragment="sidebar (option)">
 			<div class="offcanvas-body">
 				<nav class="navbar-dark">
 					<ul class="navbar-nav">
@@ -86,7 +86,7 @@
 							<div
 								class="collapse"
 								id="associate"
-								th:classappend="${opcao == 'associate'} ? 'show' : ''">
+								th:classappend="${option == 'associate'} ? 'show' : ''">
 								<ul class="navbar-nav ps-3">
 									<li>
 										<a
@@ -98,6 +98,19 @@
 											</span>
 											<span class="text-white"
 												>Register</span
+											>
+										</a>
+									</li>
+									<li>
+										<a
+											th:href="@{/associates/opensearch}"
+											class="nav-link px-3">
+											<span class="me-2">
+												<i
+													class="bi bi-plus-square text-white"></i>
+											</span>
+											<span class="text-white"
+												>Search</span
 											>
 										</a>
 									</li>

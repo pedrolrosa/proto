@@ -21,10 +21,10 @@ window.addEventListener("load", function() {
 	}
 	
 	
-	//Busca campos input com a classe componentedata na pagina atual e liga-os com
+	//Busca campos input com a classe dateComponent na pagina atual e liga-os com
 	// o componente flatpickr.
 	function prepararComponentesData() {
-    	let inputsData = document.querySelectorAll(".componentedata");
+    	let inputsData = document.querySelectorAll(".dateComponent");
     	inputsData.forEach(function(input) {
     		flatpickr(input, {
     	    	"locale": "pt",
@@ -33,12 +33,12 @@ window.addEventListener("load", function() {
     	});
     }
     
-    //Busca por botoes com a classe confirmacao e usa o AlertifyJS para pedir uma 
-    // confirmacao do usuario antes de efetuar o submit do formulario pai do botao.
+    //Busca por botoes com a classe confirmation e usa o AlertifyJS para pedir uma 
+    // confirmation do usuario antes de efetuar o submit do formulario pai do botao.
     //O valor do input hidden com a classe message dentro do formulario eh exibido na pergunta.
     //Caso o usuario aceite, o formulario eh submetido, caso cancele ou feche nada acontece.
     function prepararConfirmacoes() {
-    	let botoesConfirmacao = document.querySelectorAll(".confirmacao");
+    	let botoesConfirmacao = document.querySelectorAll(".confirmation");
     	botoesConfirmacao.forEach(function(botao) {
     		let formPai = botao.parentNode;
     		formPai.addEventListener("submit", function(evento) {

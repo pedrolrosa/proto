@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import web.proto.model.Associate;
 import web.proto.model.enums.Area;
 import web.proto.model.enums.State;
 
@@ -15,7 +14,7 @@ import web.proto.model.enums.State;
 public class ProjectFilter {
     
     private Long id;
-    private Associate owner;
+    private Long owner;
     private String name;
     private String description;
     private Area area;

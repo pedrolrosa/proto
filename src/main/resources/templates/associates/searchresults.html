@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>Associates</title>
+</head>
+
+<body>
+	<div layout:fragment="conteudo">
+
+		<div th:replace="~{layout/fragments/sidebar :: sidebar(option='associate')}"></div>
+
+		<!-- conteudo principal -->
+		<main class="mt-5 p-4 pt-5">
+			<div class="container-fluid">
+
+				<table class="table table-striped table-hover">
+					<tr>
+						<div
+							th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'id', 'Código', 'w-25')}">
+						</div>
+						<div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'name', 'Nome', 'w-25')}"></div>
+						<th scope="col">Login</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Relevancy</th>
+                        <th scope="col">Date of Creation</th>
+						<th scope="col" colspan="2">Operation</th>
+					</tr>
+					<tr th:each="associate : ${pagina.conteudo}">
+						<td th:text="${associate.id}"></td>
+						<td th:text="${associate.name}"></td>
+						<td th:text="${associate.login}"></td>
+                        <td th:text="${associate.role}"></td>
+                        <td th:text="${associate.relevancy}"></td>
+						<td th:text="${{associate.dateCreated}}"></td>
+						
+                        <td>
+                            <form th:action="@{/associates/update}" method="POST">
+                                <input type="hidden" name="id" th:value="${associate.id}">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:action="@{/associates/delete}" method="POST">
+                                <input type="hidden" th:value="'Are you sure you want to remove the associate ' + ${associate.name} + '?'" class="message">
+                                <input type="hidden" name="id" th:value="${associate.id}">
+                                <button type="submit" class="btn btn-danger confirmation">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </form>
+                        </td>
+					</tr>
+				</table>
+
+				<div th:replace="~{layout/fragments/paginacao :: paginacao(${pagina})}"></div>
+
+			</div>
+		</main>
+		<!-- !conteudo principal -->
+
+	</div>
+
+</body>
+
+</html>
