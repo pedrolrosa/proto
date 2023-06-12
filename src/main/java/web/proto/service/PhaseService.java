@@ -19,8 +19,8 @@ public class PhaseService {
     }
 
     @Transactional
-    public void delete(Long codigo) {
-        repository.deleteById(codigo);
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 
 }

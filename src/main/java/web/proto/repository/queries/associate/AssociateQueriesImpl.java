@@ -36,7 +36,7 @@ public class AssociateQueriesImpl implements AssociateQueries {
         List<Predicate> predicateList = new ArrayList<>();
 
         if (filtro.getId() != null) {
-            predicateList.add(builder.equal(a.<Long>get("codigo"), filtro.getId()));
+            predicateList.add(builder.equal(a.<Long>get("id"), filtro.getId()));
         }
 
         if (StringUtils.hasText(filtro.getName())) {
@@ -115,7 +115,7 @@ public class AssociateQueriesImpl implements AssociateQueries {
         List<Predicate> predicateList = new ArrayList<>();
 
         if (filtro.getId() != null) {
-            predicateList.add(builder.equal(a.<Long>get("codigo"), filtro.getId()));
+            predicateList.add(builder.equal(a.<Long>get("id"), filtro.getId()));
         }
 
         if (StringUtils.hasText(filtro.getName())) {

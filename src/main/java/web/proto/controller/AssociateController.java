@@ -62,16 +62,24 @@ public class AssociateController {
     public String search(AssociateFilter filtro, Model model,
             @PageableDefault(size = 10) @SortDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
             HttpServletRequest request) {
+
         Page<Associate> pagina = repository.filtrar(filtro, pageable);
-        PageWrapper<Associate> paginaWrapper = new PageWrapper<>(pagina, request);
-        logger.info("Pessoas buscadas no BD: {}", paginaWrapper.getConteudo());
-        model.addAttribute("pagina", paginaWrapper);
-        return "associates/associates";
+
+        if (!pagina.isEmpty()) {
+            PageWrapper<Associate> paginaWrapper = new PageWrapper<>(pagina, request);
+            logger.info("Pessoas buscadas no BD: {}", paginaWrapper.getConteudo());
+            model.addAttribute("pagina", paginaWrapper);
+            return "associates/associates";
+        } else {
+            model.addAttribute("message", "não acho gente");
+            model.addAttribute("option", "associate");
+            return "mostrarmensagem";
+        }
+
     }
 
     @GetMapping("/save")
-    public String showRegisterForm(Model model) {
-        model.addAttribute("associate", new Associate());
+    public String showRegisterForm(@ModelAttribute("associate") Associate obj, Model model) {
         model.addAttribute("title", "Register Associate");
         model.addAttribute("url", "/associates/save");
         model.addAttribute("btn", "Register");
@@ -100,7 +108,7 @@ public class AssociateController {
             service.save(obj);
 
             NotificacaoAlertify notificacaoAlertify = new NotificacaoAlertify("Created Associate",
-                    TipoNotificaoAlertify.SUCESSO, 5); 
+                    TipoNotificaoAlertify.SUCESSO, 5);
             model.addAttribute("title", "Register Associate");
             model.addAttribute("url", "/associates/save");
             model.addAttribute("btn", "Register");
@@ -139,6 +147,8 @@ public class AssociateController {
             return openUpdate(obj.getId(), model);
         } else {
             service.save(obj);
+            model.addAttribute("message", "Deu bao");
+            model.addAttribute("option", "associate");
             return "mostrarmensagem";
         }
     }

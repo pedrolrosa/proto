@@ -19,27 +19,27 @@
 					<input type="hidden" th:field="*{id}">
 
 					<label for="name" class="form-label mt-3">Name:</label>
-					<input type="text" id="name" th:field="*{name}" class="form-control" th:errorclass="is-invalid" required />
+					<input type="text" id="name" th:field="*{name}" class="form-control" th:errorclass="is-invalid" />
 					<span class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
 							th:each="error : ${#fields.errors('name')}" th:text="${error} + '. '"></span>
 
 					<label for="email" class="form-label mt-3">Email:</label>
-					<input type="email" id="email" th:field="*{email}" class="form-control" th:errorclass="is-invalid" required />
+					<input type="email" id="email" th:field="*{email}" class="form-control" th:errorclass="is-invalid" />
 					<span class="invalid-feedback" th:if="${#fields.hasErrors('email')}"
 							th:each="error : ${#fields.errors('email')}" th:text="${error} + '. '"></span>
 
 					<label for="login" class="form-label mt-3">Login:</label>
-					<input type="text" id="login" th:field="*{login}" class="form-control" th:errorclass="is-invalid" required />
+					<input type="text" id="login" th:field="*{login}" class="form-control" th:errorclass="is-invalid" />
 					<span class="invalid-feedback" th:if="${#fields.hasErrors('login')}"
 							th:each="error : ${#fields.errors('login')}" th:text="${error} + '. '"></span>
 
 					<label for="password" class="form-label mt-3">Password:</label>
-					<input type="password" id="password" th:field="*{password}" class="form-control" th:errorclass="is-invalid" required />
+					<input type="password" id="password" th:field="*{password}" class="form-control" th:errorclass="is-invalid" />
 					<span class="invalid-feedback" th:if="${#fields.hasErrors('password')}"
 							th:each="error : ${#fields.errors('password')}" th:text="${error} + '. '"></span>
 
 					<label for="role" class="form-label mt-3">Role:</label>
-					<select id="role" th:field="*{role}" class="form-control" th:errorclass="is-invalid" required>
+					<select id="role" th:field="*{role}" class="form-control" th:errorclass="is-invalid">
 						<option th:each="role : ${T(web.proto.model.enums.Role).values()}" th:text="${role.label}"
 							th:value="${role}"></option>
 					</select>
