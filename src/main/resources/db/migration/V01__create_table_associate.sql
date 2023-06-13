@@ -11,9 +11,11 @@ CREATE TABLE public.associates (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE public.associate_interests (
+-- teste
+
+/*CREATE TABLE public.associate_interests (
   id serial NOT NULL,
   associate_id serial NOT NULL,
   interests text NOT NULL,
   PRIMARY KEY (id)
-);
+);*/

@@ -54,11 +54,14 @@ public class Associate {
     
     private boolean relevancy;
     
+    // Lista de áreas de interesse do associado, persistida em uma tabela separada (nao eh tabela principal)
+    // *interests nao possui entidade* //
     @ElementCollection
     @CollectionTable(name = "associate_interests", joinColumns = @JoinColumn(name = "associate_id"))
     @Size(min = 1, message = "Associate must have at least one role")
     @NotEmpty
     @Enumerated(EnumType.STRING)
+    @Column(name = "interest")
     private List<Area> interests;
     
     @DateTimeFormat
