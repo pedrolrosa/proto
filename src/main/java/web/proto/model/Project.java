@@ -16,7 +16,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
@@ -32,12 +31,12 @@ import web.proto.model.enums.State;
 public class Project {
 
     @Id
-    @SequenceGenerator(name="gerador3", sequenceName="projects_id_seq", allocationSize=1)
-	@GeneratedValue(generator="gerador3", strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "associate_id")
+    @NotNull
     private Associate associate;
 
     @NotBlank(message = "Name is required")

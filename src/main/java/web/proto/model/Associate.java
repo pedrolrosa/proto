@@ -15,12 +15,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import web.proto.model.enums.Area;
@@ -32,8 +32,7 @@ import web.proto.model.enums.Role;
 public class Associate {
     
     @Id
-    @SequenceGenerator(name="gerador1", sequenceName="associates_id_seq", allocationSize=1)
-	@GeneratedValue(generator="gerador1", strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @NotBlank(message = "Name is required")
@@ -58,6 +57,7 @@ public class Associate {
     @ElementCollection
     @CollectionTable(name = "associate_interests", joinColumns = @JoinColumn(name = "associate_id"))
     @Size(min = 1, message = "Associate must have at least one role")
+    @NotEmpty
     @Enumerated(EnumType.STRING)
     private List<Area> interests;
     
