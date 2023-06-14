@@ -18,4 +18,9 @@ public class RateService {
         repository.save(obj);
     }
 
+    @Transactional
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
 }

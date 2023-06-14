@@ -23,19 +23,24 @@ public class ProjectService {
     private PhaseRepository phaseRepository;
 
     @Transactional
-    public void save(Project project) {
+    public void create(Project project) {
         project.setDateCreated(LocalDate.now());
         repository.save(project);
     }
 
     @Transactional
-    public void save(Project project, List<Phase> phases) {
-        save(project);
+    public void create(Project project, List<Phase> phases) {
+        create(project);
         
         for (Phase phase : phases) {
             phase.setProject(project);
             phaseRepository.save(phase);
         }
+    }
+
+    @Transactional
+    public Project update(Project obj) {
+        return repository.save(obj);
     }
 
     @Transactional

@@ -21,6 +21,11 @@ public class PhaseService {
     }
 
     @Transactional
+    public Phase update(Phase obj) {
+        return repository.save(obj);
+    }
+
+    @Transactional
     public void delete(Long id) {
         Optional<Phase> opt = repository.findById(id);
 
