@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" th:include="layout/default :: defaultLayout">
+<html layout:decorate="~{layout/default}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Associate Form</title>
-    <!-- Adicione os links para os arquivos CSS do Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
+
 <body>
-    <div class="container">
+    <div layout:fragment="content">
         <h1>Associate Form</h1>
         <form th:object="${associate}" th:action="@{/associates}" method="post">
             <!-- Campos do formulário -->
@@ -15,47 +16,48 @@
                 <label for="name">Name:</label>
                 <input type="text" id="name" class="form-control" th:field="*{name}" required autofocus>
             </div>
-            
+
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" class="form-control" th:field="*{email}" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="login">Login:</label>
                 <input type="text" id="login" class="form-control" th:field="*{login}" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" class="form-control" th:field="*{password}" minlength="3" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="role">Role:</label>
                 <select id="role" class="form-control" th:field="*{role}" required>
                     <option value="">Select Role</option>
-                    <option th:each="role : ${T(web.proto.model.enums.Role).values()}"
-                            th:value="${role}" th:text="${role}"></option>
+                    <option th:each="role : ${T(web.proto.model.enums.Role).values()}" th:value="${role}"
+                        th:text="${role}"></option>
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label for="interests">Interests:</label>
                 <select id="interests" class="form-control" th:field="*{interests}" multiple required>
                     <option value="" disabled>Select Interests</option>
-                    <option th:each="area : ${T(web.proto.model.enums.Area).values()}"
-                            th:value="${area}" th:text="${area}"></option>
+                    <option th:each="area : ${T(web.proto.model.enums.Area).values()}" th:value="${area}"
+                        th:text="${area}"></option>
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label for="active">Active:</label>
                 <input type="checkbox" id="active" class="form-control" th:field="*{active}">
             </div>
-            
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </body>
+
 </html>

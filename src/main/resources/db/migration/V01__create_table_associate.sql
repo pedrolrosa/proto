@@ -10,12 +10,3 @@ CREATE TABLE public.associates (
   active boolean DEFAULT 'true',
   PRIMARY KEY (id)
 );
-
--- teste
-
-/*CREATE TABLE public.associate_interests (
-  id serial NOT NULL,
-  associate_id serial NOT NULL,
-  interests text NOT NULL,
-  PRIMARY KEY (id)
-);*/

@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<html layout:decorate="~{layout/default}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Erro</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>Erro</title>
 </head>
+
 <body>
-	<div layout:fragment="conteudo">
+	<div layout:fragment="content">
 
-		<div th:replace="~{layout/fragments/sidebar :: sidebar(option='')}"></div>
-
-		<!-- conteudo principal -->
 		<main class="mt-5 p-4 pt-5">
 			<div class="container-fluid">
 				<img th:src="@{/images/error.png}" class="img-fluid mx-auto d-block mt-5" alt="Erro 404">
@@ -23,4 +22,5 @@
 	</div>
 
 </body>
+
 </html>

@@ -17,7 +17,7 @@ public class AssociateController {
     @Autowired
     private AssociateService associateService;
 
-    @GetMapping("/api/associates")
+    @GetMapping("/index")
     public String associateView(Model model) {
         return "api/associates/index";
     }
@@ -25,28 +25,28 @@ public class AssociateController {
     @GetMapping("/new")
     public String createView(Model model) {
         model.addAttribute("associate", new Associate());
-        return "associate-form";
+        return "api/associates/associate-form";
     }
 
     @PostMapping
     public String create(@ModelAttribute("associate") Associate associate) {
         associate.setDateCreated(LocalDate.now());
         associateService.create(associate);
-        return "redirect:/associates";
+        return "redirect:/api/associates";
     }
 
     @GetMapping
     public String read(Model model) {
         List<Associate> associates = associateService.read();
         model.addAttribute("associates", associates);
-        return "associate-list";
+        return "api/associates/associate-list";
     }
 
     @GetMapping("/{id}/edit")
     public String updateView(@PathVariable("id") Long id, Model model) {
         Associate associate = associateService.read(id);
         model.addAttribute("associate", associate);
-        return "associate-form";
+        return "api/associates/associate-form";
     }
 
     @PostMapping("/{id}/edit")
@@ -56,12 +56,12 @@ public class AssociateController {
         existingAssociate.setEmail(associate.getEmail());
         // Atualize os outros campos conforme necessário
         associateService.update(existingAssociate);
-        return "redirect:/associates";
+        return "redirect:/api/associates";
     }
 
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable("id") Long id) {
         associateService.delete(id);
-        return "redirect:/associates";
+        return "redirect:/api/associates";
     }
 }

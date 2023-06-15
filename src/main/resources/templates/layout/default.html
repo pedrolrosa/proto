@@ -21,13 +21,13 @@
 </head>
 
 <body>
-    <header th:replace="layout/fragments/header"></header>
+    <header th:replace="~{layout/fragments/header}"></header>
 
     <div class="container">
         <div layout:fragment="content"></div>
     </div>
 
-    <footer th:replace="layout/fragments/footer"></footer>
+    <footer th:replace="~{layout/fragments/footer}"></footer>
 
     <!-- Bootstrap JS -->
     <script src="../../static/js/vendors/bootstrap5/bootstrap.bundle.min.js"
