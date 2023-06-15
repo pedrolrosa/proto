@@ -64,7 +64,6 @@ public class Project {
     @Column(name = "date_created")
     private LocalDate dateCreated;
 
-    @AssertTrue
     private boolean active;
 
 }

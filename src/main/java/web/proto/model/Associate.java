@@ -45,7 +45,6 @@ public class Associate {
     @NotBlank(message = "Login is required")
     private String login;
 
-    @Min(value = 3, message = "Password is short")
     @NotBlank(message = "Password is required")
     private String password;
     
@@ -58,17 +57,13 @@ public class Associate {
     // *interests nao possui entidade* //
     @ElementCollection
     @CollectionTable(name = "associate_interests", joinColumns = @JoinColumn(name = "associate_id"))
-    @Size(min = 1, message = "Associate must have at least one role")
-    @NotEmpty
     @Enumerated(EnumType.STRING)
     @Column(name = "interest")
     private List<Area> interests;
     
-    @DateTimeFormat
     @Column(name = "date_created")
     private LocalDate dateCreated;
 
-    @AssertTrue
     private boolean active;
 
 }

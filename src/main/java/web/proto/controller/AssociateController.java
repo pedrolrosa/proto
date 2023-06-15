@@ -15,53 +15,52 @@ import java.util.List;
 public class AssociateController {
 
     @Autowired
-    private AssociateService associateService;
-
-    @GetMapping("/index")
-    public String associateView(Model model) {
-        return "api/associates/index";
-    }
+    private AssociateService service;
 
     @GetMapping("/new")
     public String createView(Model model) {
         model.addAttribute("associate", new Associate());
-        return "api/associates/associate-form";
+        return "api/associates/form";
     }
 
-    @PostMapping
-    public String create(@ModelAttribute("associate") Associate associate) {
+    @PostMapping("/new")
+    public String create(@ModelAttribute("associate") Associate associate, Model model) {
         associate.setDateCreated(LocalDate.now());
-        associateService.create(associate);
+        associate.setActive(true);
+        service.create(associate);
+
+        model.addAttribute("url", "/api/associates/new");
+
         return "redirect:/api/associates";
     }
 
     @GetMapping
     public String read(Model model) {
-        List<Associate> associates = associateService.read();
+        List<Associate> associates = service.read();
         model.addAttribute("associates", associates);
-        return "api/associates/associate-list";
+        return "api/associates/list";
     }
 
     @GetMapping("/{id}/edit")
     public String updateView(@PathVariable("id") Long id, Model model) {
-        Associate associate = associateService.read(id);
+        Associate associate = service.read(id);
         model.addAttribute("associate", associate);
-        return "api/associates/associate-form";
+        return "api/associates/form";
     }
 
     @PostMapping("/{id}/edit")
-    public String update(@PathVariable("id") Long id, @ModelAttribute("associate") Associate associate) {
-        Associate existingAssociate = associateService.read(id);
-        existingAssociate.setName(associate.getName());
-        existingAssociate.setEmail(associate.getEmail());
-        // Atualize os outros campos conforme necessário
-        associateService.update(existingAssociate);
+    public String update(@PathVariable("id") Long id, @ModelAttribute("associate") Associate associate, Model model) {
+        service.update(associate);
+
+        model.addAttribute("url", "/api/associates/{id}/edit");
+
         return "redirect:/api/associates";
     }
 
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable("id") Long id) {
-        associateService.delete(id);
+        service.delete(id);
         return "redirect:/api/associates";
     }
+
 }

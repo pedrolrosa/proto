@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/default}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Associate List</title>
+
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <h1 class="mt-3">Associate List</h1>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Login</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Relevancy</th>
+                    <th scope="col">Interests</th>
+                    <th scope="col">Date of Creation</th>
+                    <th scope="col" colspan="2">Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterar sobre a lista de associates e exibir os dados em cada linha da tabela -->
+                <tr th:each="associate : ${associates}">
+                    <td th:text="${associate.id}"></td>
+                    <td th:text="${associate.name}"></td>
+                    <td th:text="${associate.email}"></td>
+                    <td th:text="${associate.login}"></td>
+                    <td th:text="${associate.role}"></td>
+                    <td>
+                        <input type="checkbox" disabled th:checked="${associate.relevancy}">
+                    </td>
+                    <td>
+                        <ul>
+                            <li th:each="interest : ${associate.interests}" th:text="${interest}"></li>
+                        </ul>
+                    </td>
+                    <td th:text="${associate.dateCreated}"></td>
+
+                    <td>
+                        <form th:action="@{/api/associates/{id}/edit(id=${associate.id})}" method="get">
+                            <input type="hidden" name="id" th:value="${associate.id}">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-pencil-fill"></i>
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#confirmationModal">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+
+                        <!-- Modal de confirmação -->
+                        <div class="modal fade" id="confirmationModal" tabindex="-1"
+                            aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmationModalLabel">Confirmar exclusão</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Tem certeza de que deseja excluir o associado <strong
+                                                th:text="${associate.name}"></strong>?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <a th:href="@{/api/associates/{id}/delete(id=${associate.id})}"
+                                            class="btn btn-danger">Excluir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/api/associates/new}" class="btn btn-primary mt-3 mb-3">Add Associate</a>
+    </div>
+</body>
+
+</html>

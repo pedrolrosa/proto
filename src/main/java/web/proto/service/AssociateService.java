@@ -26,6 +26,7 @@ public class AssociateService {
         return repository.findAll();
     }
 
+    @Transactional
     public Associate read(Long id) {
         return repository.findById(id).orElse(null);
     }

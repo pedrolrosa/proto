@@ -34,7 +34,6 @@ public class Phase {
     @Lob
     private byte[] content;
 
-    @AssertTrue
     private boolean active;
 
 }
