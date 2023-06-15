@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" th:include="layout/default :: defaultLayout">
+<html layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
 <head>
+    
     <meta charset="UTF-8">
     <title>Proto</title>
-    <!-- Adicione os links para os arquivos CSS do Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 <body>
-    <div class="container">
+    <div layout:fragment="content">
         
+        <main class="mt-5 p-4 pt-5">
+			<div class="container-fluid">
+					<h1 class="text-center mt-5 mb-5">Welcome Proto</h1>
+			</div>
+		</main>
+
     </div>
 </body>
