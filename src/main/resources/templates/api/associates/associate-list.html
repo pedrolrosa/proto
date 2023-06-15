@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:include="layout/default :: defaultLayout">
+<head>
+    <meta charset="UTF-8">
+    <title>Associate List</title>
+    <!-- Adicione os links para os arquivos CSS do Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Associate List</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Login</th>
+                    <th>Role</th>
+                    <th>Interests</th>
+                    <th>Date Created</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterar sobre a lista de associates e exibir os dados em cada linha da tabela -->
+                <tr th:each="associate : ${associates}">
+                    <td th:text="${associate.id}"></td>
+                    <td th:text="${associate.name}"></td>
+                    <td th:text="${associate.email}"></td>
+                    <td th:text="${associate.login}"></td>
+                    <td th:text="${associate.role}"></td>
+                    <td>
+                        <ul>
+                            <li th:each="interest : ${associate.interests}" th:text="${interest}"></li>
+                        </ul>
+                    </td>
+                    <td th:text="${associate.dateCreated}"></td>
+                    <td>
+                        <input type="checkbox" disabled th:checked="${associate.active}">
+                    </td>
+                    <td>
+                        <a th:href="@{/associates/{id}/edit(id=${associate.id})}" class="btn btn-primary">Edit</a>
+                        <a th:href="@{/associates/{id}/delete(id=${associate.id})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/associates/new}" class="btn btn-primary">Add Associate</a>
+    </div>
+</body>
+</html>

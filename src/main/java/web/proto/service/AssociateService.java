@@ -1,6 +1,5 @@
 package web.proto.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,13 +18,16 @@ public class AssociateService {
 
     @Transactional
     public void create(Associate obj) {
-        obj.setDateCreated(LocalDate.now());
         repository.save(obj);
     }
 
     @Transactional
     public List<Associate> read() {
         return repository.findAll();
+    }
+
+    public Associate read(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Transactional
