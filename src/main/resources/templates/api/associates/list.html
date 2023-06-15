@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Associate List</title>
-
 </head>
 
 <body>
-    <div layout:fragment="content">
+    <div layout:fragment="content" class="container">
         <h1 class="mt-3">Associate List</h1>
         <table class="table table-bordered table-hover">
             <thead>
@@ -36,10 +35,11 @@
                         <input type="checkbox" disabled th:checked="${associate.relevancy}">
                     </td>
                     <td>
-                        <ul>
-                            <li th:each="interest : ${associate.interests}" th:text="${interest}"></li>
+                        <ul class="list-group">
+                            <li th:each="interest : ${associate.interests}" class="list-group-item" th:text="${interest}"></li>
                         </ul>
                     </td>
+                    
                     <td th:text="${associate.dateCreated}"></td>
 
                     <td>
