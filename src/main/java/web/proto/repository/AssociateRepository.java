@@ -6,4 +6,6 @@ import web.proto.model.Associate;
 
 public interface AssociateRepository extends JpaRepository<Associate, Long>{
     
+    Associate findByLogin(String login);
+
 }

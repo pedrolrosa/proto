@@ -3,7 +3,10 @@ package web.proto.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.validation.Valid;
 import web.proto.model.Associate;
 import web.proto.service.AssociateService;
 
@@ -24,14 +27,20 @@ public class AssociateController {
     }
 
     @PostMapping("/new")
-    public String create(@ModelAttribute("associate") Associate associate, Model model) {
-        associate.setDateCreated(LocalDate.now());
-        associate.setActive(true);
-        service.create(associate);
+    public String create(@Valid @ModelAttribute("associate") Associate associate, BindingResult result, Model model) {
 
-        model.addAttribute("url", "/api/associates/new");
+        if (result.hasErrors()) {
+            return createView(model);
+        } else {
+            associate.setDateCreated(LocalDate.now());
+            associate.setActive(true);
+            service.create(associate);
 
-        return "redirect:/api/associates";
+            model.addAttribute("url", "/api/associates/new");
+
+            return "redirect:/api/associates";
+        }
+
     }
 
     @GetMapping
@@ -49,12 +58,19 @@ public class AssociateController {
     }
 
     @PostMapping("/{id}/edit")
-    public String update(@PathVariable("id") Long id, @ModelAttribute("associate") Associate associate, Model model) {
-        service.update(associate);
+    public String update(@PathVariable("id") Long id, @Valid @ModelAttribute("associate") Associate associate,
+            BindingResult result, Model model) {
 
-        model.addAttribute("url", "/api/associates/{id}/edit");
+        if (result.hasErrors()) {
+            return updateView(id, model);
+        } else {
+            service.update(associate);
 
-        return "redirect:/api/associates";
+            model.addAttribute("url", "/api/associates/{id}/edit");
+
+            return "redirect:/api/associates";
+        }
+
     }
 
     @GetMapping("/{id}/delete")

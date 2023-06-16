@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Associate Form</title>
-
 </head>
 
 <body>
@@ -17,27 +16,33 @@
 
             <div class="form-group mt-3">
                 <label for="name">Name:</label>
-                <input type="text" id="name" class="form-control" th:field="*{name}" autofocus>
+                <input type="text" id="name" class="form-control" th:field="*{name}" th:errorclass="is-invalid" autofocus>
+                <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
+                    th:each="error : ${#fields.errors('name')}" th:text="${error} + '. '"></span>
             </div>
 
             <div class="form-group mt-3">
                 <label for="email">Email:</label>
-                <input type="email" id="email" class="form-control" th:field="*{email}">
+                <input type="email" id="email" class="form-control" th:field="*{email}" th:errorclass="is-invalid">
+                <span class="invalid-feedback" th:if="${#fields.hasErrors('email')}"
+                    th:each="error : ${#fields.errors('email')}" th:text="${error} + '. '"></span>
             </div>
 
             <div class="form-group mt-3">
                 <label for="login">Login:</label>
-                <input type="text" id="login" class="form-control" th:field="*{login}">
+                <input type="text" id="login" class="form-control" th:field="*{login}" th:errorclass="is-invalid">
+                <span class="invalid-feedback" th:if="${#fields.hasErrors('login')}"
+                    th:each="error : ${#fields.errors('login')}" th:text="${error} + '. '"></span>
             </div>
 
             <div class="form-group mt-3">
                 <label for="password">Password:</label>
-                <input type="password" id="password" class="form-control" th:field="*{password}">
+                <input type="password" id="password" class="form-control" th:field="*{password}" th:errorclass="is-invalid">
             </div>
 
             <div class="form-group mt-3">
                 <label for="role">Role:</label>
-                <select id="role" class="form-control" th:field="*{role}">
+                <select id="role" class="form-control" th:field="*{role}" th:errorclass="is-invalid">
                     <option value="">Select Role</option>
                     <option th:each="role : ${T(web.proto.model.enums.Role).values()}" th:value="${role}"
                         th:text="${role}"></option>
@@ -45,14 +50,14 @@
             </div>
 
             <div class="form-group mt-3">
-                <input type="checkbox" id="relevancy" th:field="*{relevancy}" class="form-check-input" />
+                <input type="checkbox" id="relevancy" th:field="*{relevancy}" th:errorclass="is-invalid" class="form-check-input" />
                 <label class="form-check-label" for="relevancy">Relevancy</label>
             </div>
 
             <div class="form-group mt-3">
                 <label for="interests" class="form-label">Interests:</label>
                 <div class="form-check" th:each="area : ${T(web.proto.model.enums.Area).values()}">
-                    <input type="checkbox" th:id="'interest-' + ${area}" th:name="interests" th:value="${area}"
+                    <input type="checkbox" th:id="'interest-' + ${area}" th:name="interests" th:value="${area}" th:errorclass="is-invalid"
                         class="form-check-input" th:checked="${associate.interests == null ? false : associate.interests.contains(area)}" />
                     <label class="form-check-label" th:for="'interest-' + ${area}" th:text="${area.getLabel()}"></label>
                 </div>

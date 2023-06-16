@@ -14,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -22,7 +23,7 @@ import web.proto.model.enums.Role;
 
 @Entity
 @Data
-@Table(name = "associates")
+@Table(name = "associates", uniqueConstraints = @UniqueConstraint(columnNames =  "login", name = "unique_login"))
 public class Associate {
     
     @Id
