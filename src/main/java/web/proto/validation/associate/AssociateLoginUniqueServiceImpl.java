@@ -1,4 +1,4 @@
-package web.proto.validation.service.associate;
+package web.proto.validation.associate;
 
 import java.security.InvalidParameterException;
 

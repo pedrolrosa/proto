@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
+import web.proto.validation.service.UniqueValue;
 import web.proto.validation.validator.UniqueValueAttributeValidator;
 
 @Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })

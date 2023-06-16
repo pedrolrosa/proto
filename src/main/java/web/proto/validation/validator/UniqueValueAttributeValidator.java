@@ -5,8 +5,8 @@ import org.springframework.context.ApplicationContext;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import web.proto.validation.UniqueValue;
 import web.proto.validation.UniqueValueAttribute;
+import web.proto.validation.service.UniqueValue;
 
 public class UniqueValueAttributeValidator implements ConstraintValidator<UniqueValueAttribute, Object> {
 

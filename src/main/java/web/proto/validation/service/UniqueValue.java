@@ -1,4 +1,4 @@
-package web.proto.validation;
+package web.proto.validation.service;
 
 public interface UniqueValue {
 	boolean isValueUnique(Object value, String fieldName) throws UnsupportedOperationException;
