@@ -57,7 +57,7 @@
             <div class="form-group mt-3">
                 <label for="interests" class="form-label">Interests:</label>
                 <div class="form-check" th:each="area : ${T(web.proto.model.enums.Area).values()}">
-                    <input type="checkbox" th:id="'interest-' + ${area}" th:name="interests" th:value="${area}" th:errorclass="is-invalid"
+                    <input type="checkbox" th:id="'interest-' + ${area}" th:name="interests" th:value="${area}"
                         class="form-check-input" th:checked="${associate.interests == null ? false : associate.interests.contains(area)}" />
                     <label class="form-check-label" th:for="'interest-' + ${area}" th:text="${area.getLabel()}"></label>
                 </div>
