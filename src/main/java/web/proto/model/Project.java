@@ -3,8 +3,6 @@ package web.proto.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -59,7 +57,6 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<Phase> phases;
 
-    @DateTimeFormat
     @Column(name = "date_created")
     private LocalDate dateCreated;
 

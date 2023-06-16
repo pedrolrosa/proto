@@ -23,6 +23,7 @@ public class AssociateController {
     @GetMapping("/new")
     public String createView(Model model) {
         model.addAttribute("associate", new Associate());
+        model.addAttribute("url", "/api/associates/new");
         return "api/associates/form";
     }
 
@@ -35,8 +36,6 @@ public class AssociateController {
             associate.setDateCreated(LocalDate.now());
             associate.setActive(true);
             service.create(associate);
-
-            model.addAttribute("url", "/api/associates/new");
 
             return "redirect:/api/associates";
         }
@@ -54,6 +53,7 @@ public class AssociateController {
     public String updateView(@PathVariable("id") Long id, Model model) {
         Associate associate = service.read(id);
         model.addAttribute("associate", associate);
+        model.addAttribute("url", "/api/associates/{id}/edit");
         return "api/associates/form";
     }
 
@@ -65,8 +65,6 @@ public class AssociateController {
             return updateView(id, model);
         } else {
             service.update(associate);
-
-            model.addAttribute("url", "/api/associates/{id}/edit");
 
             return "redirect:/api/associates";
         }

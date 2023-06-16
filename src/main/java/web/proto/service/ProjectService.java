@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-import web.proto.model.Phase;
 import web.proto.model.Project;
+import web.proto.model.Phase;
 import web.proto.repository.PhaseRepository;
 import web.proto.repository.ProjectRepository;
 
@@ -36,6 +36,16 @@ public class ProjectService {
             phase.setProject(project);
             phaseRepository.save(phase);
         }
+    }
+
+    @Transactional
+    public List<Project> read() {
+        return repository.findByActive(true);
+    }
+
+    @Transactional
+    public Project read(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Transactional

@@ -1,7 +1,7 @@
 package web.proto.model.enums;
 
 public enum Area {
-    TECNOLOGY("Technology"),
+    TECHNOLOGY("Technology"),
     INVESTMENT("Investment"),
     AGRONOMY("Agronomy"),
     HEALTH("Health"),

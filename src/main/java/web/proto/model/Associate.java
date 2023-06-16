@@ -37,6 +37,7 @@ public class Associate {
     @NotBlank(message = "Email is required")
     private String email;
 
+    @Column(unique = true)
     @NotBlank(message = "Login is required")
     private String login;
 

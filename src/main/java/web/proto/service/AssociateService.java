@@ -12,7 +12,7 @@ import web.proto.repository.AssociateRepository;
 
 @Service
 public class AssociateService {
-    
+
     @Autowired
     private AssociateRepository repository;
 
@@ -23,7 +23,7 @@ public class AssociateService {
 
     @Transactional
     public List<Associate> read() {
-        return repository.findAll();
+        return repository.findByActive(true);
     }
 
     @Transactional
@@ -45,5 +45,4 @@ public class AssociateService {
             repository.save(associate);
         });
     }
-
 }

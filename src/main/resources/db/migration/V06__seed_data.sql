@@ -12,9 +12,9 @@ VALUES (500, 'Pedro', 'pedro@example.com', 'ped', '{noop}123', 'COMPANY', false,
 
 -- População inicial da tabela Project
 INSERT INTO projects (id, associate_id, name, description, area, state, license, date_created)
-VALUES (100, 100, 'Project 1', 'Description 1', 'Technology', 'InProgress', 'MIT', '2023-04-19');
+VALUES (100, 100, 'Project 1', 'Description 1', 'TECHNOLOGY', 'IN_PROGRESS', 'MIT', '2023-04-19');
 INSERT INTO projects (id, associate_id, name, description, area, state, license, date_created)
-VALUES (200, 200, 'Project 2', 'Description 2', 'Investment', 'Complete', 'MIT', '2023-04-19');
+VALUES (200, 200, 'Project 2', 'Description 2', 'INVESTMENT', 'COMPLETE', 'MIT', '2023-04-19');
 
 -- População inicial da tabela Phase
 INSERT INTO phases (id, name, description, content, project_id)
