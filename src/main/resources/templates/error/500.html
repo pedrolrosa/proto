@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/default}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Erro 500</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		
+		<main class="mt-5 p-4 pt-5">
+			<div class="container-fluid">
+				<img th:src="@{/images/500.png}" class="img-fluid mx-auto d-block mt-5" alt="Erro 404">
+				<h3 class="text-center mt-5 mb-5">
+					Ocorreu um erro interno no servidor. <a th:href="@{/}">Volte para a página principal.</a>
+				</h3>
+			</div>
+		</main>
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/default}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Login</title>
+</head>
+<body>
+	<div layout:fragment="content">
+
+		<main class="mt-5 p-4 pt-5">
+			<div class="container">
+
+                <div class="mt-5">
+                    <p>john / 123 / USER</p>
+                    <p>ped / 123 / COMPANY</p>
+                    <p>rangel / 123 / ADMIN</p>
+                </div>
+				
+				<div>
+					<span th:if="${param.error}">Invalid username and/or password.</span>
+					<span th:if="${param.logout}">You have been logged out.</span>
+				</div>
+
+				<form th:action="@{/login}" method="post">
+
+					<label for="username" class="form-label mt-4">Associate:</label>
+					<input type="text" id="username" name="username" autofocus="autofocus" class="form-control">
+
+					<label for="password" class="form-label mt-4">Password:</label>
+					<input type="password" id="password" name="password" class="form-control">
+
+					<input type="submit" value="Logar" class="btn btn-primary mt-4">
+				</form>
+			</div>
+		</main>
+
+	</div>
+
+	<!-- Nao usamos
+	<th:block layout:fragment="scripts">
+		<script src="../static/js/index.js" th:src="@{/js/index.js}"></script>
+	</th:block> -->
+
+</body>
+</html>
