@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <body>
     <header>
@@ -35,7 +34,7 @@
                             <input type="submit" class="form-control btn btn-primary" value="Login" />
                         </form>
                     </div>
-    
+
                     <div sec:authorize="isAuthenticated()">
                         <!-- nome do usuario -->
                         <div class="ms-3 d-none d-sm-block">
@@ -46,17 +45,18 @@
                             </a>
                         </div>
                     </div>
-    
+
                     <div sec:authorize="isAuthenticated()">
                         <!-- botao logout -->
                         <form action="#" th:action="@{/logout}" method="post">
                             <input type="submit" class="form-control btn btn-primary" value="Logout" />
                         </form>
                     </div>
-    
+
                 </div>
             </div>
         </nav>
     </header>
 </body>
+
 </html>

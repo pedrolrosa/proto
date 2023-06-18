@@ -18,24 +18,26 @@
                 <label for="associate">Associate:</label>
                 <select id="associate" class="form-control" th:field="*{associate}" th:errorclass="is-invalid">
                     <option value="">Select Associate</option>
-                    <option th:each="associate : ${associates}" th:value="${associate}"
-                        th:text="${associate.name}" th:selected="${associate.id} == *{associate?.id}"></option>
+                    <option th:each="associate : ${associates}" th:value="${associate}" th:text="${associate.name}"
+                        th:selected="${associate.id} == *{associate?.id}"></option>
                 </select>
                 <span class="invalid-feedback" th:if="${#fields.hasErrors('associate')}"
                     th:each="error : ${#fields.errors('associate')}" th:text="${error} + '. '"></span>
             </div>
-            
+
 
             <div class="form-group mt-3">
                 <label for="name">Name:</label>
-                <input type="text" id="name" class="form-control" th:field="*{name}" th:errorclass="is-invalid" autofocus>
+                <input type="text" id="name" class="form-control" th:field="*{name}" th:errorclass="is-invalid"
+                    autofocus>
                 <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
                     th:each="error : ${#fields.errors('name')}" th:text="${error} + '. '"></span>
             </div>
 
             <div class="form-group mt-3">
                 <label for="description">Description:</label>
-                <textarea id="description" class="form-control" th:field="*{description}" th:errorclass="is-invalid"></textarea>
+                <textarea id="description" class="form-control" th:field="*{description}"
+                    th:errorclass="is-invalid"></textarea>
                 <span class="invalid-feedback" th:if="${#fields.hasErrors('description')}"
                     th:each="error : ${#fields.errors('description')}" th:text="${error} + '. '"></span>
             </div>

@@ -1,21 +1,30 @@
 package web.proto.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
 import web.proto.model.Associate;
 import web.proto.service.AssociateService;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @Controller
 @RequestMapping("/api/associates")
 public class AssociateController {
+
+	private static final Logger logger = LoggerFactory.getLogger(AssociateController.class);
+
 
     @Autowired
     private AssociateService service;
@@ -53,7 +62,7 @@ public class AssociateController {
     public String updateView(@PathVariable("id") Long id, Model model) {
         Associate associate = service.read(id);
         model.addAttribute("associate", associate);
-        model.addAttribute("url", "/api/associates/{id}/edit");
+        model.addAttribute("url", "/api/associates/"+id+"/edit");
         return "api/associates/form";
     }
 
@@ -73,6 +82,7 @@ public class AssociateController {
 
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable("id") Long id) {
+        logger.info(id.toString());
         service.delete(id);
         return "redirect:/api/associates";
     }

@@ -36,10 +36,11 @@
                     </td>
                     <td>
                         <ul class="list-group">
-                            <li th:each="interest : ${associate.interests}" class="list-group-item" th:text="${interest}"></li>
+                            <li th:each="interest : ${associate.interests}" class="list-group-item"
+                                th:text="${interest}"></li>
                         </ul>
                     </td>
-                    
+
                     <td th:text="${associate.dateCreated}"></td>
 
                     <td>
@@ -52,13 +53,13 @@
                     </td>
                     <td>
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#confirmationModal">
+                            th:data-bs-target="'#confirmationModal-' + ${associate.id}">
                             <i class="bi bi-trash-fill"></i>
                         </button>
 
                         <!-- Modal de confirmação -->
-                        <div class="modal fade" id="confirmationModal" tabindex="-1"
-                            aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                        <div class="modal fade" th:id="'confirmationModal-' + ${associate.id}" tabindex="-1"
+                            th:attr="aria-labelledby='confirmationModalLabel-' + ${associate.id}" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">

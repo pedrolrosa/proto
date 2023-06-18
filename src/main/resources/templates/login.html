@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout/default}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>Login</title>
 </head>
+
 <body>
 	<div layout:fragment="content">
 
 		<main class="mt-5 p-4 pt-5">
 			<div class="container">
 
-                <div class="mt-5">
-                    <p>john / 123 / USER</p>
-                    <p>ped / 123 / COMPANY</p>
-                    <p>rangel / 123 / ADMIN</p>
-                </div>
-				
+				<div class="mt-5">
+					<p>john / 123 / USER</p>
+					<p>ped / 123 / COMPANY</p>
+					<p>rangel / 123 / ADMIN</p>
+				</div>
+
 				<div>
-					<span th:if="${param.error}">Invalid username and/or password.</span>
-					<span th:if="${param.logout}">You have been logged out.</span>
+					<span th:if="${param.error}" class="text-danger">Invalid username and/or password.</span>
+					<span th:if="${param.logout}" class="text-danger">You have been logged out.</span>
 				</div>
 
 				<form th:action="@{/login}" method="post">
@@ -43,4 +45,5 @@
 	</th:block> -->
 
 </body>
+
 </html>
