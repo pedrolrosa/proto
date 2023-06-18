@@ -1,4 +1,4 @@
-package web.proto.validation.associate;
+package web.proto.service.associate;
 
 import web.proto.validation.service.UniqueValue;
 

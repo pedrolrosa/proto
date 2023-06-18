@@ -8,16 +8,13 @@ import java.lang.annotation.Target;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import web.proto.validation.service.UniqueValue;
 import web.proto.validation.validator.UniqueValueAttributeValidator;
 
-@Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })
-@Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = UniqueValueAttributeValidator.class)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE })
 @Documented
 public @interface UniqueValueAttribute {
-
-    String attribute();
 
 	String message() default "";
 
@@ -25,14 +22,4 @@ public @interface UniqueValueAttribute {
 
 	Class<? extends Payload>[] payload() default {};
 	
-	Class<? extends UniqueValue> service();
-	
-    String serviceQualifier() default "";
-	
-	@Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })
-	@Retention(RetentionPolicy.RUNTIME)
-	@Documented
-	@interface List {
-		UniqueValueAttribute[] value();
-	}
 }

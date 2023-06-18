@@ -20,13 +20,12 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import web.proto.model.enums.Area;
 import web.proto.model.enums.Role;
+import web.proto.service.associate.AssociateLoginUniqueService;
 import web.proto.validation.UniqueValueAttribute;
-import web.proto.validation.associate.AssociateLoginUniqueService;
 
 @Entity
 @Data
 @Table(name = "associates", uniqueConstraints = @UniqueConstraint(columnNames =  "login", name = "unique_login"))
-@UniqueValueAttribute(attribute = "login", service = AssociateLoginUniqueService.class, message = "There is already a login equal to this registered")
 public class Associate {
     
     @Id
@@ -40,6 +39,7 @@ public class Associate {
     @NotBlank(message = "Email is required")
     private String email;
 
+    @UniqueValueAttribute(message = "There is already a login equal to this registered")
     @Column(unique = true)
     @NotBlank(message = "Login is required")
     private String login;
