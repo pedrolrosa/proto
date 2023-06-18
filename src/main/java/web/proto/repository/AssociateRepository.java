@@ -8,7 +8,7 @@ import web.proto.model.Associate;
 
 public interface AssociateRepository extends JpaRepository<Associate, Long>{
     
-    Associate findByLogin(String login);
+    Associate findByLoginIgnoreCase(String login);
 
     List<Associate> findByActive(Boolean active);
 
