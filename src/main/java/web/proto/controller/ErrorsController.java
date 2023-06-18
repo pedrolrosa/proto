@@ -11,8 +11,8 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
-public class ErrosController implements ErrorController {
-    private static final Logger logger = LoggerFactory.getLogger(ErrosController.class);
+public class ErrorsController implements ErrorController {
+    private static final Logger logger = LoggerFactory.getLogger(ErrorsController.class);
 
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request) {
