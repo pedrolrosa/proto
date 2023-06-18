@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,9 @@ public class AssociateController {
     @Autowired
     private AssociateService service;
 
+    @Autowired
+	private PasswordEncoder passwordEncoder;
+
     @GetMapping("/new")
     public String createView(Model model) {
         model.addAttribute("associate", new Associate());
@@ -42,6 +46,7 @@ public class AssociateController {
         if (result.hasErrors()) {
             return createView(model);
         } else {
+            associate.setPassword(passwordEncoder.encode(associate.getPassword()));
             associate.setDateCreated(LocalDate.now());
             associate.setActive(true);
             service.create(associate);
