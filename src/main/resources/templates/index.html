@@ -2,20 +2,101 @@
 <html layout:decorate="~{layout/default}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="UTF-8">
-    <title>Proto</title>
+    <title>Proto - Project Management Made Easy</title>
+    <style>
+        .lead {
+            font-size: 1.25rem;
+            color: #6c757d;
+        }
 
+        .feature-icon {
+            font-size: 3rem;
+            color: #007bff;
+        }
+
+        .feature-heading {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: #343a40;
+        }
+
+        .feature-description {
+            margin-bottom: 3rem;
+        }
+
+        .cta-btn {
+            font-size: 1.25rem;
+            padding: 0.75rem 2.5rem;
+        }
+    </style>
 </head>
 
 <body>
     <div layout:fragment="content">
 
-        <main class="mt-5 p-4 pt-5">
-            <div class="container-fluid">
-                <h1 class="text-center mt-5 mb-5">Welcome Proto</h1>
+        <main class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h1 class="display-4">Welcome to Proto</h1>
+                    <p class="lead">
+                        Proto is a powerful project management tool that simplifies the way you organize and track your
+                        projects. Designed to enhance collaboration and boost productivity, Proto provides you with a
+                        comprehensive set of features to manage projects of any size or complexity.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <span class="feature-icon bi bi-file-earmark-check-fill"></span>
+                    </div>
+                    <h2 class="feature-heading text-center">Streamline Project Management</h2>
+                    <p class="feature-description">
+                        With Proto, you can create projects, define tasks, set deadlines, and assign team members with
+                        ease. The intuitive interface allows you to track progress, monitor milestones, and ensure timely
+                        completion of your projects.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <span class="feature-icon bi bi-people-fill"></span>
+                    </div>
+                    <h2 class="feature-heading text-center">Enhance Collaboration</h2>
+                    <p class="feature-description">
+                        Collaborate seamlessly with your team members through Proto's built-in communication tools. Share
+                        project updates, exchange files, and engage in real-time discussions to keep everyone aligned and
+                        informed.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <span class="feature-icon bi bi-award-fill"></span>
+                    </div>
+                    <h2 class="feature-heading text-center">Monitor Performance</h2>
+                    <p class="feature-description">
+                        Get valuable insights into your project's performance with Proto's advanced reporting and
+                        analytics features. Track key metrics, generate customized reports, and make data-driven decisions
+                        to optimize your project outcomes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-6 text-center">
+                    <p class="lead">
+                        Start managing your projects efficiently with Proto today and experience the impact it can have
+                        on your productivity and success.
+                    </p>
+                    <a href="/login" class="btn btn-primary btn-lg cta-btn">Sign Up Now</a>
+                </div>
             </div>
         </main>
 
     </div>
+
 </body>
+
+</html>
