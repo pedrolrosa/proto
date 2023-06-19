@@ -1,5 +1,7 @@
 package web.proto.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/api/projects")
 public class ProjectController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AssociateController.class);
 
     @Autowired
     private ProjectService service;
@@ -38,6 +42,7 @@ public class ProjectController {
     @PostMapping("/new")
     public String create(@Valid @ModelAttribute("project") Project project, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            logger.info(result.toString());
             return createView(model);
         } else {
             project.setDateCreated(LocalDate.now());
@@ -57,7 +62,10 @@ public class ProjectController {
     @GetMapping("/{id}/edit")
     public String updateView(@PathVariable("id") Long id, Model model) {
         Project project = service.read(id);
+        List<Associate> associates = associateService.read();
+
         model.addAttribute("project", project);
+        model.addAttribute("associates", associates);
         model.addAttribute("url", "/api/projects/{id}/edit");
         return "api/projects/form";
     }

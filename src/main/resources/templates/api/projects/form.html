@@ -16,16 +16,15 @@
 
             <div class="form-group mt-3">
                 <label for="associate">Associate:</label>
-                <select id="associate" class="form-control" th:field="*{associate}" th:errorclass="is-invalid">
+                <select id="associate" class="form-control" th:field="*{associate.id}" th:errorclass="is-invalid">
                     <option value="">Select Associate</option>
-                    <option th:each="associate : ${associates}" th:value="${associate}" th:text="${associate.name}"
-                        th:selected="${associate.id} == *{associate?.id}"></option>
+                    <option th:each="associate : ${associates}" th:value="${associate.id}" th:text="${associate.name}"
+                        th:selected="${associate.id == project.associate?.id}"></option>
                 </select>
                 <span class="invalid-feedback" th:if="${#fields.hasErrors('associate')}"
                     th:each="error : ${#fields.errors('associate')}" th:text="${error} + '. '"></span>
-            </div>
-
-
+            </div>      
+            
             <div class="form-group mt-3">
                 <label for="name">Name:</label>
                 <input type="text" id="name" class="form-control" th:field="*{name}" th:errorclass="is-invalid"

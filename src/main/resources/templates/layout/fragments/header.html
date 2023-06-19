@@ -30,8 +30,8 @@
 
                     <div sec:authorize="!isAuthenticated()">
                         <!-- botao login -->
-                        <form action="#" th:action="@{/login}" method="post">
-                            <input type="submit" class="form-control btn btn-primary" value="Login" />
+                        <form action="#" th:action="@{/login}" method="get">
+                            <button type="submit" class="btn btn-primary">Login</button>
                         </form>
                     </div>
 
@@ -49,7 +49,7 @@
                     <div sec:authorize="isAuthenticated()">
                         <!-- botao logout -->
                         <form action="#" th:action="@{/logout}" method="post">
-                            <input type="submit" class="form-control btn btn-primary" value="Logout" />
+                            <button type="submit" class="btn btn-primary">Logout</button>
                         </form>
                     </div>
 

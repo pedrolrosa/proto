@@ -20,7 +20,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import web.proto.model.enums.Area;
 import web.proto.model.enums.Role;
-import web.proto.service.AssociateLoginService;
+import web.proto.service.associates.AssociateLoginService;
 import web.proto.validation.UniqueValueAttribute;
 
 @Entity

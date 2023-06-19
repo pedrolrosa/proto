@@ -1,4 +1,4 @@
-package web.proto.service;
+package web.proto.service.associates;
 
 import java.security.InvalidParameterException;
 

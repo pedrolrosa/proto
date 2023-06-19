@@ -33,12 +33,42 @@
                     <td th:text="${project.license}"></td>
                     <td th:text="${project.dateCreated}"></td>
                     <td>
-                        <a th:href="@{/api/projects/{id}/edit(id=${project.id})}" class="btn btn-primary">
-                            <i class="bi bi-pencil-fill"></i> Edit
-                        </a>
-                        <a th:href="@{/api/projects/{id}/delete(id=${project.id})}" class="btn btn-danger">
-                            <i class="bi bi-trash-fill"></i> Delete
-                        </a>
+                        <form th:action="@{/api/projects/{id}/edit(id=${project.id})}" method="get">
+                            <input type="hidden" name="id" th:value="${project.id}">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-pencil-fill"></i>
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            th:data-bs-target="'#confirmationModal-' + ${project.id}">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+
+                        <!-- Modal de confirmação -->
+                        <div class="modal fade" th:id="'confirmationModal-' + ${project.id}" tabindex="-1"
+                            th:attr="aria-labelledby='confirmationModalLabel-' + ${project.id}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmationModalLabel">Confirmar exclusão</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Tem certeza de que deseja excluir o projeto <strong
+                                                th:text="${project.name}"></strong>?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <a th:href="@{/api/projects/{id}/delete(id=${project.id})}"
+                                            class="btn btn-danger">Excluir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>

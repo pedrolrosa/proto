@@ -26,7 +26,6 @@ public class AssociateController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AssociateController.class);
 
-
     @Autowired
     private AssociateService service;
 
