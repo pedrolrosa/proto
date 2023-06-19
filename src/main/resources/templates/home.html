@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/default}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Project Feed</title>
+    <style>
+        /* Custom styles for this template */
+        .post {
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-body {
+            padding: 1rem;
+            background-color: #f7f7f7;
+            border-radius: 10px;
+        }
+
+        .post-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-content {
+            margin-top: 1rem;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .text-muted {
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div layout:fragment="content" class="container">
+        <h1 class="mt-3">Home Feed</h1>
+
+        <div class="row mt-4">
+            <div class="col-md-6 col-lg-4" th:each="project : ${projects}">
+                <div class="post">
+                    <div class="post-body">
+                        <h5 class="post-title" th:text="${project.name}"></h5>
+                        <p class="card-text">
+                            <strong>Description:</strong>
+                            <span th:text="${project.description}"></span>
+                        </p>
+                        <p class="card-text">
+                            <strong>Area:</strong>
+                            <span th:text="${project.area}"></span>
+                        </p>
+                        <p class="card-text">
+                            <strong>State:</strong>
+                            <span th:text="${project.state}"></span>
+                        </p>
+                        <p class="card-text">
+                            <strong>License:</strong>
+                            <span th:text="${project.license}"></span>
+                        </p>
+                        <p class="card-text">
+                            <strong>Date Created:</strong>
+                            <span th:text="${project.dateCreated}"></span>
+                        </p>
+                    </div>
+                    <div class="post-footer">
+                        <span class="text-muted">Posted by: Me</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 package web.proto.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,13 @@ public class PhaseService {
     private PhaseRepository repository;
 
     @Transactional
-    public void save(Phase obj){
+    public void create(Phase obj){
         repository.save(obj);
+    }
+
+    @Transactional
+    public List<Phase> read() {
+        return repository.findByActive(true);
     }
 
     @Transactional
