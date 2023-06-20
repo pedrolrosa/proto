@@ -30,8 +30,7 @@ public class Phase {
     @NotBlank(message = "Description is required")
     private String description;
 
-    @Lob
-    private byte[] content;
+    private String content;
 
     private boolean active;
 

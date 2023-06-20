@@ -26,7 +26,9 @@ public class HomeController {
     @GetMapping
     public String feed(Model model){
         List<Project> projects = projectService.read();
+        List<Phase> phases = phaseService.read();
 
+        model.addAttribute("phases", phases);
         model.addAttribute("projects", projects);
 
         return "home";
