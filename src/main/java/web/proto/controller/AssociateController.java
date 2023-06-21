@@ -33,17 +33,16 @@ public class AssociateController {
 	private PasswordEncoder passwordEncoder;
 
     @GetMapping("/new")
-    public String createView(Model model) {
-        model.addAttribute("associate", new Associate());
+    public String createView(@ModelAttribute("associate") Associate associate, Model model) {
         model.addAttribute("url", "/api/associates/new");
         return "api/associates/form";
     }
 
     @PostMapping("/new")
-    public String create(@Valid @ModelAttribute("associate") Associate associate, BindingResult result, Model model) {
+    public String create(@Valid Associate associate, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            return createView(model);
+            return createView(associate, model);
         } else {
             associate.setPassword(passwordEncoder.encode(associate.getPassword()));
             associate.setDateCreated(LocalDate.now());
@@ -63,19 +62,20 @@ public class AssociateController {
     }
 
     @GetMapping("/{id}/edit")
-    public String updateView(@PathVariable("id") Long id, Model model) {
-        Associate associate = service.read(id);
-        model.addAttribute("associate", associate);
+    public String updateView(@PathVariable("id") Long id, @ModelAttribute("associate") Associate associate, Model model) {
+        if(associate.getName() == null) {
+            associate = service.read(id);
+        }
         model.addAttribute("url", "/api/associates/"+id+"/edit");
         return "api/associates/form";
     }
 
     @PostMapping("/{id}/edit")
-    public String update(@PathVariable("id") Long id, @Valid @ModelAttribute("associate") Associate associate,
+    public String update(@PathVariable("id") Long id, @Valid Associate associate,
             BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            return updateView(id, model);
+            return updateView(id, associate, model);
         } else {
             service.update(associate);
 

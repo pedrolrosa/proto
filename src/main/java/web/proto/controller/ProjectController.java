@@ -29,11 +29,10 @@ public class ProjectController {
     private AssociateService associateService;
 
     @GetMapping("/new")
-    public String createView(Model model) {
+    public String createView(@ModelAttribute("project") Project project, Model model) {
 
         List<Associate> associates = associateService.read();
 
-        model.addAttribute("project", new Project());
         model.addAttribute("associates", associates);
         model.addAttribute("url", "/api/projects/new");
         return "api/projects/form";
@@ -43,7 +42,7 @@ public class ProjectController {
     public String create(@Valid @ModelAttribute("project") Project project, BindingResult result, Model model) {
         if (result.hasErrors()) {
             logger.info(result.toString());
-            return createView(model);
+            return createView(project, model);
         } else {
             project.setDateCreated(LocalDate.now());
             project.setActive(true);
@@ -60,21 +59,23 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}/edit")
-    public String updateView(@PathVariable("id") Long id, Model model) {
-        Project project = service.read(id);
+    public String updateView(@PathVariable("id") Long id, @ModelAttribute("project") Project project, Model model) {
+        if (project.getName() == null) {
+            project = service.read(id);
+        }
+
         List<Associate> associates = associateService.read();
 
-        model.addAttribute("project", project);
         model.addAttribute("associates", associates);
-        model.addAttribute("url", "/api/projects/{id}/edit");
+        model.addAttribute("url", "/api/projects/"+id+"/edit");
         return "api/projects/form";
     }
 
     @PostMapping("/{id}/edit")
-    public String update(@PathVariable("id") Long id, @Valid @ModelAttribute("project") Project project,
+    public String update(@PathVariable("id") Long id, @Valid Project project,
             BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return updateView(id, model);
+            return updateView(id, project, model);
         } else {
             service.update(project);
             return "redirect:/api/projects";
