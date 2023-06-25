@@ -47,7 +47,6 @@
             <div class="form-group mt-3">
                 <label for="role">Role:</label>
                 <select id="role" class="form-control" th:field="*{role}" th:errorclass="is-invalid">
-                    <option value="">Select Role</option>
                     <option th:each="role : ${T(web.proto.model.enums.Role).values()}" th:value="${role}"
                         th:text="${role}"></option>
                 </select>

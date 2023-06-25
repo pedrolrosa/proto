@@ -13,8 +13,8 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
+                            <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'id', 'Id', 'w-25')}"></div>
+                            <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'name', 'Name', 'w-25')}"></div>
                             <th scope="col">Description</th>
                             <th scope="col">Area</th>
                             <th scope="col">State</th>
@@ -23,8 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Iterar sobre a lista de projects e exibir os dados em cada linha da tabela -->
-                        <tr th:each="project : ${projects}">
+                        <tr th:each="project : ${pagina.conteudo}">
                             <td th:text="${project.id}"></td>
                             <td th:text="${project.name}"></td>
                             <td th:text="${project.description}"></td>
