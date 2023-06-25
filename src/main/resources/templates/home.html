@@ -86,6 +86,19 @@
                     </div>
                     <div class="post-footer">
                         <span class="text-muted">Posted by: <span th:text="${project.associate.name}"></span></span>
+                        <div sec:authorize="isAuthenticated()" class="pe-2">
+                            <!-- botao register -->
+                            <form action="#" th:action="@{/}" method="get">
+                                <button type="submit" class="btn btn-primary">Impulsionar</button>
+                            </form>
+                        </div> 
+
+                        <div sec:authorize="!isAuthenticated()" class="pe-2">
+                            <!-- botao register -->
+                            <form action="#" th:action="@{/login}" method="get">
+                                <button type="submit" class="btn btn-primary">Impulsionar</button>
+                            </form>
+                        </div> 
                     </div>
                 </div>
             </div>

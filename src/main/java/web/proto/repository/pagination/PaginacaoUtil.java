@@ -2,20 +2,16 @@ package web.proto.repository.pagination;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Order;
-import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
 public class PaginacaoUtil {
@@ -46,17 +42,5 @@ public class PaginacaoUtil {
 		}
 		criteriaQuery.orderBy(ordenacoes);
 	}
-	
-	// public static long getTotalRegistros(Root<?> root, Predicate[] predicateArray, CriteriaBuilder builder, EntityManager manager) {
-	// 	logger.debug("Calculando o total de registros que o filtro retornará.");
-	// 	CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
-	// 	criteriaQuery.select(builder.count(criteriaQuery.from(root.getJavaType())));
-	// 	criteriaQuery.where(predicateArray);
-	// 	TypedQuery<Long> typedQueryTotal = manager.createQuery(criteriaQuery);
-	// 	long totalRegistros = typedQueryTotal.getSingleResult();
-	// 	logger.debug("O filtro retornará {} registros.", totalRegistros);	
-	// 	return totalRegistros;
-	// }
-
 
 }

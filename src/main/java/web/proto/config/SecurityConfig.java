@@ -46,7 +46,7 @@ public class SecurityConfig {
 		JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
 		manager.setUsersByUsernameQuery("select login, password, active "
 			  						+ "from associates "
-			  						+ "where login = ?");
+			  						+ "where login = ? and active = true");
 		manager.setAuthoritiesByUsernameQuery(
 			  "SELECT login , role FROM associates WHERE login = ?");
 		return manager;
