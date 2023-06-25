@@ -55,14 +55,14 @@ public class ProjectQueriesImpl implements ProjectQueries {
             predicateList.add(builder.equal(p.<State>get("state"), filter.getState()));
         }
 
-        if (filter.getDateCreated() != null) {
+        if (filter.getDateStart() != null) {
             predicateList.add(builder.greaterThanOrEqualTo(
-                    p.<LocalDate>get(DATA_CREATED), filter.getDateCreated()));
+                    p.<LocalDate>get(DATA_CREATED), filter.getDateStart()));
         }
 
-        if (filter.getDateCreated() != null) {
+        if (filter.getDateEnd() != null) {
             predicateList.add(builder.lessThanOrEqualTo(
-                    p.<LocalDate>get(DATA_CREATED), filter.getDateCreated()));
+                    p.<LocalDate>get(DATA_CREATED), filter.getDateEnd()));
         }
 
         predicateList.add(builder.equal(p.<Boolean>get("active"), true));
@@ -109,14 +109,14 @@ public class ProjectQueriesImpl implements ProjectQueries {
             predicateList.add(builder.equal(p.<State>get("state"), filter.getState()));
         }
 
-        if (filter.getDateCreated() != null) {
+        if (filter.getDateStart() != null) {
             predicateList.add(builder.greaterThanOrEqualTo(
-                    p.<LocalDate>get(DATA_CREATED), filter.getDateCreated()));
+                    p.<LocalDate>get(DATA_CREATED), filter.getDateStart()));
         }
 
-        if (filter.getDateCreated() != null) {
+        if (filter.getDateEnd() != null) {
             predicateList.add(builder.lessThanOrEqualTo(
-                    p.<LocalDate>get(DATA_CREATED), filter.getDateCreated()));
+                    p.<LocalDate>get(DATA_CREATED), filter.getDateEnd()));
         }
 
         predicateList.add(builder.equal(p.<Boolean>get("active"), true));

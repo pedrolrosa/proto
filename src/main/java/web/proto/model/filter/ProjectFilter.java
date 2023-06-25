@@ -21,6 +21,7 @@ public class ProjectFilter {
 
     private State state;
 
-    private LocalDate dateCreated;
+    private LocalDate dateStart;
+    private LocalDate dateEnd;
 
 }

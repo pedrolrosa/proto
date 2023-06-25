@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/default}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Project List</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+
+                <h1 class="mt-3">Project List</h1>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Area</th>
+                            <th scope="col">State</th>
+                            <th scope="col">License</th>
+                            <th scope="col">Date Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Iterar sobre a lista de projects e exibir os dados em cada linha da tabela -->
+                        <tr th:each="project : ${projects}">
+                            <td th:text="${project.id}"></td>
+                            <td th:text="${project.name}"></td>
+                            <td th:text="${project.description}"></td>
+                            <td th:text="${project.area}"></td>
+                            <td th:text="${project.state}"></td>
+                            <td th:text="${project.license}"></td>
+                            <td th:text="${project.dateCreated}"></td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+                <div th:replace="~{layout/fragments/paginacao :: paginacao(${pagina})}"></div>
+
+    </div>
+</body>
+
+</html>

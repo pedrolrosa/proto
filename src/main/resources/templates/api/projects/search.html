@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/default}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Project Form</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+
+        <h1>Search</h1>
+
+        <form th:action="@{/search}" method="GET">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" class="form-control">
+
+            <label for="description" class="form-label">Description</label>
+            <input type="text" id="description" name="description" class="form-control">
+
+            <label for="area" class="form-label">Area:</label>
+            <select id="area" name="area" class="form-control">
+                <option value="">Select Area</option>
+                <option th:each="area : ${T(web.proto.model.enums.Area).values()}" th:value="${area}" th:text="${area}">
+                </option>
+            </select>
+
+            <label for="state" class="form-label">State:</label>
+            <select id="state" class="form-control">
+                <option value="">Select State</option>
+                <option th:each="state : ${T(web.proto.model.enums.State).values()}" th:value="${state}"
+                    th:text="${state}"></option>
+            </select>
+
+            <label for="dateStart" class="form-label mt-3">Date Start</label>
+            <input type="text" id="dateStart" name="dateStart" class="form-control">
+            
+            <label for="dateEnd" class="form-label mt-3">Date End</label>
+            <input type="text" id="dateEnd" name="dateEnd" class="form-control">
+
+
+            <input type="submit" value="Pesquisar" class="btn btn-primary mt-3">
+        </form>
+
+    </div>
+</body>
+
+</html>
