@@ -16,29 +16,33 @@
                             <a class="nav-link" href="/home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/api/projects">Projects</a>
+                            <a class="nav-link" href="/opensearch">Pesquisar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/opensearch">Search</a>
+                            <a class="nav-link" href="/ranking">Ranking</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/api/associates">Associates</a>
+                        <li class="nav-item" sec:authorize="hasAuthority('ADM')">
+                            <a class="nav-link" href="/api/projects">Projetos</a>
                         </li>
+                        <li class="nav-item" sec:authorize="hasAuthority('ADM')">
+                            <a class="nav-link" href="/api/associates">Associados</a>
+                        </li>
+                        
                     </ul>
                 </div>
                 <div class="d-flex justify-content-end align-items-center">
 
-                    <div sec:authorize="!isAuthenticated()" class="p-2">
+                    <div sec:authorize="!isAuthenticated()">
                         <!-- botao login -->
                         <form action="#" th:action="@{/login}" method="get">
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>
                     </div>
                     
-                    <div sec:authorize="!isAuthenticated()" class="p-2">
+                    <div sec:authorize="!isAuthenticated()" class="ps-3">
                         <!-- botao register -->
                         <form action="#" th:action="@{/register}" method="get">
-                            <button type="submit" class="btn btn-primary">Register</button>
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
                         </form>
                     </div>                    
 
