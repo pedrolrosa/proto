@@ -43,6 +43,7 @@
             <div class="form-group mt-3">
                 <label for="area">Area:</label>
                 <select id="area" class="form-control" th:field="*{area}" th:errorclass="is-invalid">
+                    <option value="">Select Area</option>
                     <option th:each="area : ${T(web.proto.model.enums.Area).values()}" th:value="${area}"
                         th:text="${area}"></option>
                 </select>
@@ -53,6 +54,7 @@
             <div class="form-group mt-3">
                 <label for="state">State:</label>
                 <select id="state" class="form-control" th:field="*{state}" th:errorclass="is-invalid">
+                    <option value="">Select State</option>
                     <option th:each="state : ${T(web.proto.model.enums.State).values()}" th:value="${state}"
                         th:text="${state}"></option>
                 </select>

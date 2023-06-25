@@ -3,6 +3,7 @@ package web.proto.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -47,6 +48,7 @@ public class Associate {
     @NotBlank(message = "Password is required")
     private String password;
     
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Role role;
     
