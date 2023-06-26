@@ -31,11 +31,14 @@ public class ProjectService {
     @Transactional
     public void create(Project project, List<Phase> phases) {
         create(project);
-        
-        for (Phase phase : phases) {
-            phase.setProject(project);
-            phaseRepository.save(phase);
+
+        if (phases != null) {
+            for (Phase phase : phases) {
+                phase.setActive(true);
+                phaseRepository.save(phase);
+            }
         }
+
     }
 
     @Transactional

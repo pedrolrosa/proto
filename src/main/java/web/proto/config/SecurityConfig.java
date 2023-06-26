@@ -25,6 +25,7 @@ public class SecurityConfig {
 			.authorizeHttpRequests(configurer -> configurer
 				.requestMatchers("/css/**", "/js/**", "/images/**", "/", "/index.html").permitAll()
 				.requestMatchers("/api/**").hasAuthority("ADM")
+				.requestMatchers("/profile/**").authenticated()
 				.anyRequest().permitAll()
 			)
 			.formLogin(form -> form

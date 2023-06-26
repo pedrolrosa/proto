@@ -11,12 +11,17 @@
         <h1>Welcome to your Profile</h1>
 
         <div>
-            <h2>Associate Details</h2>
             <p><strong>Name:</strong> <span th:text="${associate.name}"></span></p>
             <p><strong>Email:</strong> <span th:text="${associate.email}"></span></p>
-            <!-- Add more details here such as username, profile picture, etc. -->
+            <p><strong>Login:</strong> <span th:text="${associate.login}"></span></p>
+            <p><strong>Role:</strong> <span th:text="${associate.role}"></span></p>
+            <ul class="list-group">
+                <strong>Interests:</strong>
+                <li th:each="interest : ${associate.interests}" class="list-group-item"
+                    th:text="${interest}"></li>
+            </ul>
 
-            <h2>Your Projects</h2>
+            <h2 class="mt-3">Your Projects</h2>
             <table class="table">
                 <thead>
                     <tr>
@@ -26,16 +31,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Iterate over the associate's projects -->
                     <tr th:each="project : ${projects}">
                         <td><span th:text="${project.name}"></span></td>
                         <td><span th:text="${project.description}"></span></td>
                         <td>
-                            <!-- View project details -->
-                            <a th:href="@{/projects/{id}(id=${project.id})}" class="btn btn-primary">View</a>
-                            <!-- Edit project details -->
-                            <a th:href="@{/projects/{id}/edit(id=${project.id})}" class="btn btn-secondary">Edit</a>
-                            <!-- Delete project -->
+                            <a th:href="@{profile/projects/{id}(id=${project.id})}" class="btn btn-primary">View</a>
+
+                            <a th:href="@{profile/projects/{id}/edit(id=${project.id})}"
+                                class="btn btn-secondary">Edit</a>
+
                             <form th:action="@{/projects/{id}(id=${project.id})}" method="post" class="d-inline">
                                 <input type="hidden" name="_method" value="DELETE" />
                                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -45,19 +49,11 @@
                 </tbody>
             </table>
 
-            <h2>Create a New Project</h2>
-            <form th:action="@{/newproject}" method="post">
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="title" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" class="form-control" required></textarea>
-                </div>
-                <!-- Add more project fields here as needed -->
-                <button type="submit" class="btn btn-primary">Create Project</button>
+            <form th:action="@{/profile/newproject}" method="get">
+                <input type="hidden" th:name="login" th:value="${#authentication.principal.username}" />
+                <button type="submit" class="btn btn-success">Novo Projeto</button>
             </form>
+            
         </div>
     </div>
 </body>

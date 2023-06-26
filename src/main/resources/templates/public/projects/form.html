@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/default}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Project Form</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <h1 class="mt-3">Project Form</h1>
+        <form th:object="${project}" th:action="@{${url}}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{associate}">
+            <input type="hidden" th:field="*{dateCreated}">
+            <input type="hidden" th:field="*{active}">
+
+            <div class="form-group mt-3">
+                <label for="name">Name:</label>
+                <input type="text" id="name" class="form-control" th:field="*{name}" th:errorclass="is-invalid"
+                    autofocus>
+                <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
+                    th:each="error : ${#fields.errors('name')}" th:text="${error} + '. '"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="description">Description:</label>
+                <textarea id="description" class="form-control" th:field="*{description}"
+                    th:errorclass="is-invalid"></textarea>
+                <span class="invalid-feedback" th:if="${#fields.hasErrors('description')}"
+                    th:each="error : ${#fields.errors('description')}" th:text="${error} + '. '"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="area">Area:</label>
+                <select id="area" class="form-control" th:field="*{area}" th:errorclass="is-invalid">
+                    <option value="">Select Area</option>
+                    <option th:each="area : ${T(web.proto.model.enums.Area).values()}" th:value="${area}"
+                        th:text="${area}"></option>
+                </select>
+                <span class="invalid-feedback" th:if="${#fields.hasErrors('area')}"
+                    th:each="error : ${#fields.errors('area')}" th:text="${error} + '. '"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="state">State:</label>
+                <select id="state" class="form-control" th:field="*{state}" th:errorclass="is-invalid">
+                    <option value="">Select State</option>
+                    <option th:each="state : ${T(web.proto.model.enums.State).values()}" th:value="${state}"
+                        th:text="${state}"></option>
+                </select>
+                <span class="invalid-feedback" th:if="${#fields.hasErrors('state')}"
+                    th:each="error : ${#fields.errors('state')}" th:text="${error} + '. '"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="license">License:</label>
+                <select id="license" class="form-control" th:field="*{license}" th:errorclass="is-invalid">
+                    <option value="">Select License</option>
+                    <option th:each="license : ${T(web.proto.model.enums.License).values()}" th:value="${license}"
+                        th:text="${license}"></option>
+                </select>
+                <span class="invalid-feedback" th:if="${#fields.hasErrors('license')}"
+                    th:each="error : ${#fields.errors('license')}" th:text="${error} + '. '"></span>
+            </div>
+
+            <div id="phasesContainer" class="mt-3">
+                <!-- Existing phases -->
+                <div th:each="phase, phaseIndex : ${phases}" class="form-group phase">
+                    <div th:if="${phase.project.id == project.id}">
+                        <label th:for="${'phase' + phaseIndex.index}"
+                            th:text="'Phase ' + (phaseIndex.index + 1) + ':'"></label>
+                        <input type="text" th:id="${'phase' + phaseIndex.index}" class="form-control"
+                            th:field="*{phases[__${phaseIndex.index}__].name}">
+                        <input type="hidden" th:field="*{phases[__${phaseIndex.index}__].id}">
+                        <input type="hidden" th:field="*{phases[__${phaseIndex.index}__].project}">
+                        <textarea class="form-control mt-2" rows="3"
+                            th:field="*{phases[__${phaseIndex.index}__].description}"></textarea>
+                        <textarea class="form-control mt-2" rows="6"
+                            th:field="*{phases[__${phaseIndex.index}__].content}"></textarea>
+                        <button type="button" class="btn btn-danger btn-sm mt-2 removePhaseBtn">Remove</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="button" id="addPhaseBtn" class="btn btn-primary mt-3 mb-3">Add Phase</button>
+
+            <input type="hidden" th:name="login" th:value="${#authentication.principal.username}" />
+            <button type="submit" class="btn btn-primary mt-3 mb-3">Submit</button>
+        </form>
+
+        <script>
+            $(document).ready(function () {
+                var phaseIndex = $(".phase").length + 1;
+
+                // Função para adicionar uma nova fase
+                $("#addPhaseBtn").click(function () {
+                    var phaseHtml =
+                        `<div class="form-group mt-3 phase">
+                        <label for="phase${phaseIndex}">Phase ${phaseIndex}:</label>
+                        <input type="text" id="phase${phaseIndex}" class="form-control" name="phases[${phaseIndex - 1}].name">
+                        <input type="hidden" th:field="*{phases[__${phaseIndex.index}__].id}">
+                        <input type="hidden" th:field="*{phases[__${phaseIndex.index}__].project}">
+                        <textarea class="form-control mt-2" rows="3" name="phases[${phaseIndex - 1}].description"></textarea>
+                        <textarea class="form-control mt-2" rows="6" name="phases[${phaseIndex - 1}].content"></textarea>
+                        <button type="button" class="btn btn-danger btn-sm mt-2 removePhaseBtn">Remove</button>
+                    </div>`;
+
+                    $("#phasesContainer").append(phaseHtml);
+                    phaseIndex++;
+                });
+
+                // Função para remover uma fase
+                $("#phasesContainer").on("click", ".removePhaseBtn", function () {
+                    $(this).closest(".phase").remove();
+                    updatePhaseIndexes();
+                });
+
+                // Função para atualizar os índices das fases após remover uma fase
+                function updatePhaseIndexes() {
+                    $(".phase").each(function (index) {
+                        $(this).find("label").text(`Phase ${index + 1}:`);
+                        $(this).find("input[name^='phases']").attr("name", `phases[${index}].name`);
+                        $(this).find("input[name^='phases']").attr("name", `phases[${index}].id`);
+                        $(this).find("input[name^='phases']").attr("name", `phases[${index}].project`);
+                        $(this).find("textarea[name^='phases']").attr("name", `phases[${index}].description`);
+                        $(this).find("textarea[name^='phases']").attr("name", `phases[${index}].content`);
+                    });
+                    phaseIndex = $(".phase").length + 1;
+                }
+            });
+        </script>
+    </div>
+</body>
+
+</html>

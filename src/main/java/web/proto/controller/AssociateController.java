@@ -24,13 +24,13 @@ import web.proto.service.AssociateService;
 @RequestMapping("/api/associates")
 public class AssociateController {
 
-	private static final Logger logger = LoggerFactory.getLogger(AssociateController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AssociateController.class);
 
     @Autowired
     private AssociateService service;
 
     @Autowired
-	private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/new")
     public String createView(@ModelAttribute("associate") Associate associate, Model model) {
@@ -62,11 +62,15 @@ public class AssociateController {
     }
 
     @GetMapping("/{id}/edit")
-    public String updateView(@PathVariable("id") Long id, @ModelAttribute("associate") Associate associate, Model model) {
-        if(associate.getName() == null) {
+    public String updateView(@PathVariable("id") Long id, Associate associate,
+            Model model) {
+
+        if (associate.getName() == null) {
             associate = service.read(id);
         }
-        model.addAttribute("url", "/api/associates/"+id+"/edit");
+
+        model.addAttribute("associate", associate);
+        model.addAttribute("url", "/api/associates/" + id + "/edit");
         return "api/associates/form";
     }
 
@@ -77,6 +81,7 @@ public class AssociateController {
         if (result.hasErrors()) {
             return updateView(id, associate, model);
         } else {
+            associate.setPassword(passwordEncoder.encode(associate.getPassword()));
             service.update(associate);
 
             return "redirect:/api/associates";
