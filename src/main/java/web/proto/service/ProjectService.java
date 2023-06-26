@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import web.proto.model.Project;
-import web.proto.model.Phase;
-import web.proto.repository.PhaseRepository;
 import web.proto.repository.ProjectRepository;
 
 @Service
@@ -19,26 +17,11 @@ public class ProjectService {
     @Autowired
     private ProjectRepository repository;
 
-    @Autowired
-    private PhaseRepository phaseRepository;
 
     @Transactional
     public void create(Project project) {
         project.setDateCreated(LocalDate.now());
         repository.save(project);
-    }
-
-    @Transactional
-    public void create(Project project, List<Phase> phases) {
-        create(project);
-
-        if (phases != null) {
-            for (Phase phase : phases) {
-                phase.setActive(true);
-                phaseRepository.save(phase);
-            }
-        }
-
     }
 
     @Transactional
