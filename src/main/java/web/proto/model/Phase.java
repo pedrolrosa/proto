@@ -1,5 +1,6 @@
 package web.proto.model;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +30,7 @@ public class Phase {
     @NotBlank(message = "Description is required")
     private String description;
 
+    @NotBlank(message = "Contents is required")
     private String content;
 
     private boolean active;

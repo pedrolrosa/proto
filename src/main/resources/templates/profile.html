@@ -37,9 +37,6 @@
                         <td>
                             <a th:href="@{profile/projects/{id}(id=${project.id})}" class="btn btn-primary">View</a>
 
-                            <a th:href="@{profile/projects/{id}/edit(id=${project.id})}"
-                                class="btn btn-secondary">Edit</a>
-
                             <form th:action="@{/projects/{id}(id=${project.id})}" method="post" class="d-inline">
                                 <input type="hidden" name="_method" value="DELETE" />
                                 <button type="submit" class="btn btn-danger">Delete</button>

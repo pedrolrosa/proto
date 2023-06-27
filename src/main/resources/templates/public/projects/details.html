@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/default}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Proto - Profile</title>
+</head>
+
+<body>
+    <div layout:fragment="content" class="container">
+
+        <div class="container mt-5">
+            <h1>Project Details</h1>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Project Information</h5>
+
+                    <dl class="row">
+                        <dt class="col-sm-3">ID:</dt>
+                        <dd class="col-sm-9" th:text="${project.id}"></dd>
+
+                        <dt class="col-sm-3">Name:</dt>
+                        <dd class="col-sm-9" th:text="${project.name}"></dd>
+
+                        <dt class="col-sm-3">Description:</dt>
+                        <dd class="col-sm-9" th:text="${project.description}"></dd>
+
+                        <dt class="col-sm-3">Area:</dt>
+                        <dd class="col-sm-9" th:text="${project.area}"></dd>
+
+                        <dt class="col-sm-3">State:</dt>
+                        <dd class="col-sm-9" th:text="${project.state}"></dd>
+
+                        <dt class="col-sm-3">License:</dt>
+                        <dd class="col-sm-9" th:text="${project.license}"></dd>
+
+                        <dt class="col-sm-3">Date Created:</dt>
+                        <dd class="col-sm-9" th:text="${project.dateCreated}"></dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Project Phases</h5>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Content</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="phase : ${phases}">
+                                <div th:if="${phase.project.id == project.id}">
+                                    <td th:text="${phase.id}"></td>
+                                    <td th:text="${phase.name}"></td>
+                                    <td th:text="${phase.description}"></td>
+                                    <td th:text="${phase.content}"></td>
+                                </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <form th:action="@{/profile/projects/{id}/newphase(id=${project.id})}" method="get">
+                <button type="submit" class="btn btn-success">Nova Fase</button>
+            </form>
+
+
+        </div>
+    </div>
+</body>
+
+</html>
