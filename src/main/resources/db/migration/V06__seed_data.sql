@@ -24,8 +24,3 @@ VALUES (200, 'Phase 2', 'Description of Phase 2', 'Content of Phase 2', 100);
 INSERT INTO phases (id, name, description, content, project_id)
 VALUES (300, 'Phase 3', 'Description of Phase 3', 'Content of Phase 3', 200);
 
--- População inicial da tabela Rate
-INSERT INTO rates (id, associate_id, project_id, score)
-VALUES (100, 100, 100, 5);
-INSERT INTO rates (id, associate_id, project_id, score)
-VALUES (200, 200, 200, 4);

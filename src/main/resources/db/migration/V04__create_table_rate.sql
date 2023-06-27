@@ -1,8 +1,7 @@
 CREATE TABLE public.rates (
-  id bigserial NOT NULL,
   associate_id bigserial NOT NULL,
   project_id bigserial NOT NULL,
   score integer NOT NULL,
-  PRIMARY KEY (id)
+  PRIMARY KEY (associate_id, project_id)
 );
 
