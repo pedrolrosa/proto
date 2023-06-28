@@ -52,20 +52,23 @@ public class HomeController {
 
     @GetMapping
     public String feed(Model model, Principal principal) {
-        String login = principal.getName();
         List<Project> projects = projectService.read();
         List<Phase> phases = phaseService.read();
 
-        Map<Long, Boolean> boosterMap = new HashMap<>();
-        for (Project project : projects) {
-            Associate associate = associateRepository.findByLogin(login);
-            boolean booster = rateRepository.existsByAssociateAndProject(associate, project);
-            boosterMap.put(project.getId(), booster);
+        if (principal != null) {
+            String login = principal.getName();
+
+            Map<Long, Boolean> boosterMap = new HashMap<>();
+            for (Project project : projects) {
+                Associate associate = associateRepository.findByLogin(login);
+                boolean booster = rateRepository.existsByAssociateAndProject(associate, project);
+                boosterMap.put(project.getId(), booster);
+            }
+            model.addAttribute("boosterMap", boosterMap);
         }
 
         model.addAttribute("phases", phases);
         model.addAttribute("projects", projects);
-        model.addAttribute("boosterMap", boosterMap);
 
         return "home";
     }
