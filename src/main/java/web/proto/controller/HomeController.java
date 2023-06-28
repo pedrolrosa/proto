@@ -1,6 +1,9 @@
 package web.proto.controller;
 
+import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,21 +51,28 @@ public class HomeController {
     private RateService rateService;
 
     @GetMapping
-    public String feed(Model model) {
+    public String feed(Model model, Principal principal) {
+        String login = principal.getName();
         List<Project> projects = projectService.read();
         List<Phase> phases = phaseService.read();
-        List<Rate> rates = rateService.read();
 
-        model.addAttribute("rates", rates);
+        Map<Long, Boolean> boosterMap = new HashMap<>();
+        for (Project project : projects) {
+            Associate associate = associateRepository.findByLogin(login);
+            boolean booster = rateRepository.existsByAssociateAndProject(associate, project);
+            boosterMap.put(project.getId(), booster);
+        }
+
         model.addAttribute("phases", phases);
         model.addAttribute("projects", projects);
+        model.addAttribute("boosterMap", boosterMap);
 
         return "home";
     }
 
     @PostMapping
     public String boostProject(@RequestParam("login") String login, @RequestParam("project") Long id, Model model) {
-        
+
         Associate associate = associateRepository.findByLogin(login);
         Project project = projectRepository.findById(id).orElse(null);
 

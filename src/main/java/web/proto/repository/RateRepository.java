@@ -8,7 +8,7 @@ import web.proto.model.Rate;
 
 public interface RateRepository extends JpaRepository<Rate, Long> {
 
-    Rate findByAssociateAndProject(Associate associate, Project project);
+    Boolean existsByAssociateAndProject(Associate associate, Project project);
     
 }
 
