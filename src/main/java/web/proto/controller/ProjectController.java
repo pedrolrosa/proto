@@ -59,13 +59,14 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}/edit")
-    public String updateView(@PathVariable("id") Long id, @ModelAttribute("project") Project project, Model model) {
+    public String updateView(@PathVariable("id") Long id, Project project, Model model) {
         if (project.getName() == null) {
             project = service.read(id);
         }
 
         List<Associate> associates = associateService.read();
 
+        model.addAttribute("project", project);
         model.addAttribute("associates", associates);
         model.addAttribute("url", "/api/projects/"+id+"/edit");
         return "api/projects/form";

@@ -17,7 +17,7 @@ public class Rate {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "associate_id")
+    @JoinColumn(name = "associate_login")
     private Associate associate;
 
     @Id

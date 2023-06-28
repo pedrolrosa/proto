@@ -50,7 +50,7 @@ public class IndexController {
     @GetMapping("/register")
     public String openRegister(@ModelAttribute("associate") Associate associate, Model model) {
         model.addAttribute("url", "/register");
-        return "api/associates/form";
+        return "public/associates/form";
     }
 
     @PostMapping("/register")
@@ -59,6 +59,7 @@ public class IndexController {
         if (result.hasErrors()) {
             return openRegister(associate, model);
         } else {
+            associate.setRelevancy(false);
             associate.setPassword(passwordEncoder.encode(associate.getPassword()));
             associate.setDateCreated(LocalDate.now());
             associate.setActive(true);

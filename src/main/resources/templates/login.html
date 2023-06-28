@@ -13,12 +13,6 @@
 		<main class="d-flex justify-content-center centered my-5 mt-5 p-4 pt-5">
 			<div class="container">
 
-				<div>
-					<p class="text-white">john / 123 / USER</p>
-					<p class="text-white">ped / 123 / COMPANY</p>
-					<p class="text-white">rangel / 123 / ADMIN</p>
-				</div>
-
 				<div class="my-4">
 					<div th:if="${param.error}" class="alert alert-danger" role="alert">
 						Invalid username and/or password.
@@ -28,7 +22,7 @@
 					</div>
 				</div>
 
-				<form th:action="@{/login}" method="post">
+				<form th:action="@{/login}" method="post" class="w-5">
 
 					<div class="form-group mt-4">
 						<label for="username" class="text-white">Associate:</label>
@@ -45,13 +39,6 @@
 					</div>
 
 				</form>
-
-				<div sec:authorize="!isAuthenticated()">
-					<!-- botao register -->
-					<form action="#" th:action="@{/register}" method="get">
-						<button type="submit" class="btn btn-primary">Cadastrar</button>
-					</form>
-				</div>
 
 			</div>
 		</main>

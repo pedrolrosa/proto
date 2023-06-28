@@ -2,6 +2,8 @@ package web.proto.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,8 @@ import web.proto.service.RateService;
 @RequestMapping("/home")
 public class HomeController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AssociateController.class);
+
     @Autowired
     private PhaseService phaseService;
 
@@ -47,7 +51,9 @@ public class HomeController {
     public String feed(Model model) {
         List<Project> projects = projectService.read();
         List<Phase> phases = phaseService.read();
+        List<Rate> rates = rateService.read();
 
+        model.addAttribute("rates", rates);
         model.addAttribute("phases", phases);
         model.addAttribute("projects", projects);
 
@@ -59,15 +65,8 @@ public class HomeController {
         Associate associate = associateRepository.findByLoginIgnoreCase(login);
         Project project = projectRepository.findById(id).orElse(null);
 
-        if (project == null) {
-
-            return "error";
-        }
-
-        Rate existingRate = rateRepository.findByAssociateAndProject(associate, project);
-        if (existingRate != null) {
-            return "error";
-        }
+        Boolean hasBoosted = rateService.hasBoosted(associate, project);
+        model.addAttribute("hasBoosted", hasBoosted);
 
         Rate rate = new Rate();
         rate.setAssociate(associate);
