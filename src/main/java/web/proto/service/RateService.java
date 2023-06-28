@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-import web.proto.model.Associate;
-import web.proto.model.Project;
 import web.proto.model.Rate;
 import web.proto.repository.RateRepository;
 

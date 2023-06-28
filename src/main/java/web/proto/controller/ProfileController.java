@@ -48,6 +48,8 @@ public class ProfileController {
     @GetMapping
     public String showProfile(Model model, Authentication authentication) {
         String login = authentication.getName();
+        logger.info(login);
+        
         Associate logged = associateRepository.findByLoginIgnoreCase(login);
         List<Project> projects = projectRepository.findAllByAssociateId(logged.getId());
 

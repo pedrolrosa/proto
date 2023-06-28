@@ -55,6 +55,8 @@ public class HomeController {
         List<Project> projects = projectService.read();
         List<Phase> phases = phaseService.read();
 
+        logger.info(principal.getName());
+
         if (principal != null) {
             String login = principal.getName();
 

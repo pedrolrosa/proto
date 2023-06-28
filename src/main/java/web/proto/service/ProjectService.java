@@ -10,12 +10,16 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import web.proto.model.Project;
 import web.proto.repository.ProjectRepository;
+import web.proto.repository.RateRepository;
 
 @Service
 public class ProjectService {
 
     @Autowired
     private ProjectRepository repository;
+
+    @Autowired
+    private RateRepository rateRepository;
 
 
     @Transactional
@@ -47,6 +51,11 @@ public class ProjectService {
             project.setActive(false);
             repository.save(project);
         });
+    }
+
+    @Transactional
+    public Integer getProjectScore(Project project) {
+        return rateRepository.sumScoreByProject(project);
     }
 
 }

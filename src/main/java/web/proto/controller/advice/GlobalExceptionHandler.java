@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-//Vai afetar todos os controladores
 @ControllerAdvice  
 public class GlobalExceptionHandler {
 
@@ -18,7 +17,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public String handleAllExceptions(HttpServletRequest request, Exception exception) {
-        // ESQUEMA DO ID DO ERRO
         logger.error("A requisição {} lançou uma {}", request.getRequestURL(), exception);
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
