@@ -10,6 +10,8 @@ public interface AssociateRepository extends JpaRepository<Associate, Long>{
     
     Associate findByLoginIgnoreCase(String login);
 
+    Associate findByLogin(String login);
+
     List<Associate> findByActive(Boolean active);
 
 }

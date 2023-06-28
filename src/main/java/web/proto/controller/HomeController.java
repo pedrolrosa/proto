@@ -62,11 +62,9 @@ public class HomeController {
 
     @PostMapping
     public String boostProject(@RequestParam("login") String login, @RequestParam("project") Long id, Model model) {
-        Associate associate = associateRepository.findByLoginIgnoreCase(login);
+        
+        Associate associate = associateRepository.findByLogin(login);
         Project project = projectRepository.findById(id).orElse(null);
-
-        Boolean hasBoosted = rateService.hasBoosted(associate, project);
-        model.addAttribute("hasBoosted", hasBoosted);
 
         Rate rate = new Rate();
         rate.setAssociate(associate);

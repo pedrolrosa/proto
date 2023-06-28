@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class RateId implements Serializable {
-    private String associate;
+    private Long associate;
     private Long project;
 
 }

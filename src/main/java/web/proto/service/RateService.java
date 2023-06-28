@@ -32,14 +32,4 @@ public class RateService {
         repository.deleteById(id);
     }
 
-    @Transactional
-    public Boolean hasBoosted(Associate associate, Project project){
-
-        if(repository.findByAssociateAndProject(associate, project) != null){
-            return true;
-        }
-
-        return false;
-    }
-
 }

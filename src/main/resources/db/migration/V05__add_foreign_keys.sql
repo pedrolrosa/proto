@@ -9,8 +9,8 @@ ALTER TABLE public.projects
     NOT VALID;
 
 ALTER TABLE public.rates
-    ADD FOREIGN KEY (associate_login)
-    REFERENCES public.associates (login)
+    ADD FOREIGN KEY (associate_id)
+    REFERENCES public.associates (id)
     NOT VALID;
 
 ALTER TABLE public.rates
