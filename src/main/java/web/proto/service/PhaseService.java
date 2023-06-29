@@ -28,8 +28,13 @@ public class PhaseService {
     }
 
     @Transactional
+    public Phase read(Long id) {
+        return repository.findByIdAndActiveTrue(id);
+    }
+
+    @Transactional
     public List<Phase> read(Project project) {
-        return repository.findByProject(project);
+        return repository.findByProjectAndActiveTrue(project);
     }
 
     @Transactional

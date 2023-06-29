@@ -9,7 +9,7 @@ import web.proto.repository.queries.project.ProjectQueries;
 
 public interface ProjectRepository extends JpaRepository<Project, Long>, ProjectQueries{
 
-    List<Project> findAllByAssociateId(Long associate);
+    List<Project> findByAssociateIdAndActiveTrue(Long associate);
 
     List<Project> findByActive(boolean active);
 }

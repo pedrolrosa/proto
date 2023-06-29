@@ -9,7 +9,9 @@ import web.proto.model.Project;
 
 public interface PhaseRepository extends JpaRepository<Phase, Long>{
 
-    List<Phase> findByProject(Project project);
+    Phase findByIdAndActiveTrue(Long id);
+
+    List<Phase> findByProjectAndActiveTrue(Project project);
     
     List<Phase> findByActive(Boolean active);
 

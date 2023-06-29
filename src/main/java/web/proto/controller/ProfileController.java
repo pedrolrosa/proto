@@ -51,7 +51,7 @@ public class ProfileController {
         logger.info(login);
 
         Associate logged = associateRepository.findByLoginIgnoreCase(login);
-        List<Project> projects = projectRepository.findAllByAssociateId(logged.getId());
+        List<Project> projects = projectService.readAll(logged.getId());
 
         model.addAttribute("associate", logged);
         model.addAttribute("projects", projects);
@@ -98,10 +98,39 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
+    @GetMapping("/projects/{id}/edit")
+    public String projectUpdateView(@RequestParam("login") String login, @PathVariable("id") Long id, Project project, Model model) {
+        if (project.getName() == null) {
+            project = projectService.read(id);
+        }
+        project.setAssociate(associateRepository.findByLoginIgnoreCase(login));
+
+        model.addAttribute("project", project);
+        model.addAttribute("url", "/profile/projects/" + id + "/edit");
+        return "api/projects/form";
+    }
+
+    @PostMapping("/projects/{id}/edit")
+    public String projectUpdate(@RequestParam("login") String login, @PathVariable("id") Long id, @Valid Project project,
+            BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return projectUpdateView(login, id, project, model);
+        } else {
+            projectService.update(project);
+            return "redirect:/profile";
+        }
+    }
+
+    @GetMapping("projects/{id}/delete")
+    public String projectDelete(@PathVariable("id") Long id) {
+        projectService.delete(id);
+        return "redirect:/profile";
+    }
+
     @GetMapping("/projects/{id}/newphase")
     public String newPhaseView(@PathVariable("id") Long id, @ModelAttribute("phase") Phase phase, Model model) {
 
-        model.addAttribute("url", "/profile/projects/"+id+"/newphase");
+        model.addAttribute("url", "/profile/projects/" + id + "/newphase");
         return "public/phases/form";
     }
 
@@ -122,6 +151,34 @@ public class ProfileController {
 
             return "redirect:/profile/projects/{id}";
         }
+    }
+
+    @GetMapping("/projects/{idProject}/phases/{idPhase}/edit")
+    public String phaseUpdateView(@PathVariable("idProject") Long idProject, @PathVariable("idPhase") Long idPhase, Phase phase, Model model) {
+        if (phase.getName() == null) {
+            phase = phaseService.read(idPhase);
+        }
+
+        model.addAttribute("phase", phase);
+        model.addAttribute("url", "/profile/projects/" + idProject + "/phases/"+ idPhase +"/edit");
+        return "public/phases/form";
+    }
+
+    @PostMapping("/projects/{idProject}/phases/{idPhase}/edit")
+    public String phaseUpdate(@PathVariable("idProject") Long idProject, @PathVariable("idPhase") Long idPhase, @Valid Phase phase,
+            BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return phaseUpdateView(idProject, idPhase, phase, model);
+        } else {
+            phaseService.update(phase);
+            return "redirect:/profile/projects/"+idProject;
+        }
+    }
+
+    @GetMapping("/projects/{idProject}/phases/{idPhase}/delete")
+    public String phaseDelete(@PathVariable("idProject") Long idProject, @PathVariable("idPhase") Long idPhase) {
+        phaseService.delete(idPhase);
+        return "redirect:/profile/projects/"+idProject;
     }
 
 }

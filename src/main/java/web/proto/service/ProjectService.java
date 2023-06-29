@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import web.proto.model.Associate;
 import web.proto.model.Project;
 import web.proto.repository.ProjectRepository;
 import web.proto.repository.RateRepository;
@@ -31,6 +32,11 @@ public class ProjectService {
     @Transactional
     public List<Project> read() {
         return repository.findByActive(true);
+    }
+
+    @Transactional
+    public List<Project> readAll(Long associate) {
+        return repository.findByAssociateIdAndActiveTrue(associate);
     }
 
     @Transactional
