@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import web.proto.model.Phase;
+import web.proto.model.Project;
 import web.proto.repository.PhaseRepository;
 
 @Service
@@ -24,6 +25,11 @@ public class PhaseService {
     @Transactional
     public List<Phase> read() {
         return repository.findByActive(true);
+    }
+
+    @Transactional
+    public List<Phase> read(Project project) {
+        return repository.findByProject(project);
     }
 
     @Transactional

@@ -55,14 +55,13 @@ public class HomeController {
         List<Project> projects = projectService.read();
         List<Phase> phases = phaseService.read();
 
-        logger.info(principal.getName());
-
         if (principal != null) {
             String login = principal.getName();
 
             Map<Long, Boolean> boosterMap = new HashMap<>();
             for (Project project : projects) {
                 Associate associate = associateRepository.findByLogin(login);
+                logger.info(login);
                 boolean booster = rateRepository.existsByAssociateAndProject(associate, project);
                 boosterMap.put(project.getId(), booster);
             }

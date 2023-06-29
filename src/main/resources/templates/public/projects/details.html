@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <div class="card mt-3">
+            <div th:if="${!phases.isEmpty}" class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title">Project Phases</h5>
 
@@ -56,19 +56,17 @@
                         </thead>
                         <tbody>
                             <tr th:each="phase : ${phases}">
-                                <div th:if="${phase.project.id == project.id}">
-                                    <td th:text="${phase.id}"></td>
-                                    <td th:text="${phase.name}"></td>
-                                    <td th:text="${phase.description}"></td>
-                                    <td th:text="${phase.content}"></td>
-                                </div>
+                                <td th:text="${phase.id}"></td>
+                                <td th:text="${phase.name}"></td>
+                                <td th:text="${phase.description}"></td>
+                                <td th:text="${phase.content}"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <form th:action="@{/profile/projects/{id}/newphase(id=${project.id})}" method="get">
+            <form th:action="@{/profile/projects/{id}/newphase(id=${project.id})}" method="get" class="mt-3 mb-3">
                 <button type="submit" class="btn btn-success">Nova Fase</button>
             </form>
 

@@ -15,42 +15,43 @@
             <p><strong>Email:</strong> <span th:text="${associate.email}"></span></p>
             <p><strong>Login:</strong> <span th:text="${associate.login}"></span></p>
             <p><strong>Role:</strong> <span th:text="${associate.role}"></span></p>
-            <ul class="list-group">
+            <ul th:if="${!associate.interests.isEmpty}" class="list-group">
                 <strong>Interests:</strong>
-                <li th:each="interest : ${associate.interests}" class="list-group-item"
-                    th:text="${interest}"></li>
+                <li th:each="interest : ${associate.interests}" class="list-group-item" th:text="${interest}"></li>
             </ul>
+            <div th:if="${!projects.isEmpty}">
+                <h2 class="mt-3">Your Projects</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th class="">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="project : ${projects}">
+                            <td><span th:text="${project.name}"></span></td>
+                            <td><span th:text="${project.description}"></span></td>
+                            <td>
+                                <a th:href="@{profile/projects/{id}(id=${project.id})}" class="btn btn-primary">View</a>
 
-            <h2 class="mt-3">Your Projects</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th class="">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="project : ${projects}">
-                        <td><span th:text="${project.name}"></span></td>
-                        <td><span th:text="${project.description}"></span></td>
-                        <td>
-                            <a th:href="@{profile/projects/{id}(id=${project.id})}" class="btn btn-primary">View</a>
+                                <form th:action="@{/projects/{id}(id=${project.id})}" method="post" class="d-inline">
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                            <form th:action="@{/projects/{id}(id=${project.id})}" method="post" class="d-inline">
-                                <input type="hidden" name="_method" value="DELETE" />
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
 
-            <form th:action="@{/profile/newproject}" method="get">
+            <form th:action="@{/profile/newproject}" method="get" class="mb-3">
                 <input type="hidden" th:name="login" th:value="${#authentication.principal.username}" />
                 <button type="submit" class="btn btn-success">Novo Projeto</button>
             </form>
-            
+
         </div>
     </div>
 </body>

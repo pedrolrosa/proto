@@ -49,7 +49,7 @@ public class ProfileController {
     public String showProfile(Model model, Authentication authentication) {
         String login = authentication.getName();
         logger.info(login);
-        
+
         Associate logged = associateRepository.findByLoginIgnoreCase(login);
         List<Project> projects = projectRepository.findAllByAssociateId(logged.getId());
 
@@ -88,7 +88,7 @@ public class ProfileController {
         Optional<Project> opt = projectRepository.findById(id);
         if (opt != null) {
             Project project = opt.get();
-            List<Phase> phases = phaseService.read();
+            List<Phase> phases = phaseService.read(project);
 
             model.addAttribute("project", project);
             model.addAttribute("phases", phases);

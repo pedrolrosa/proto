@@ -21,20 +21,24 @@ public class RankingController {
 
     @Autowired
     private ProjectService projectService;
-    
+
     @GetMapping
     public String showRanking(Model model) {
         List<Project> projects = projectService.read();
         Map<Project, Integer> scores = new HashMap<>();
 
         for (Project project : projects) {
-            int totalScore = projectService.getProjectScore(project);
-            scores.put(project, totalScore);
+            if (projectService.getProjectScore(project) != null) {
+                int totalScore = projectService.getProjectScore(project);
+                scores.put(project, totalScore);
+            } else {
+                continue;
+            }
         }
 
         List<Map.Entry<Project, Integer>> sortedScores = scores.entrySet().stream()
-            .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-            .collect(Collectors.toList());
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toList());
 
         model.addAttribute("scores", sortedScores);
         return "ranking";
