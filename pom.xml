@@ -15,7 +15,7 @@
 	<name>proto</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>20</java.version>
+		<java.version>19</java.version>
 		<disruptor.version>3.4.4</disruptor.version>
 	</properties>
 	<dependencies>
