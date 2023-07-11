@@ -22,7 +22,7 @@ public class RelatoryService {
 	private DataSource dataSource;
 	
 	public byte[] generateRelatory() {
-		InputStream arquivoJasper = getClass().getResourceAsStream("/relatorys/Cherry.jasper");
+		InputStream arquivoJasper = getClass().getResourceAsStream("/relatorys/Cherry_1.jasper");
 		try (Connection conexao = dataSource.getConnection()){
 			try {
 				JasperPrint jasperPrint = JasperFillManager.fillReport(arquivoJasper, null, conexao);
